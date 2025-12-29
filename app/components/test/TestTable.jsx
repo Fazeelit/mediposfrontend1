@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const TestsTable = ({ tests, onEdit }) => {
+const TestsTable = ({ tests, onEdit, renderActionColumn }) => {
   const headers = [
     "Patient",
     "Age",
@@ -19,24 +19,25 @@ const TestsTable = ({ tests, onEdit }) => {
 
   return (
     <div className="rounded-xl shadow-lg bg-white/80 backdrop-blur overflow-x-auto">
-      <table className="w-full text-sm whitespace-nowrap">
+      <table className="w-full min-w-[1400px] text-sm whitespace-nowrap">
         <thead className="bg-slate-50 border-b border-gray-300">
           <tr>
             {headers.map((h) => (
               <th
                 key={h}
-                className="p-2 text-left font-semibold text-slate-600"
+                className="p-3 text-left font-semibold text-slate-600"
               >
                 {h}
               </th>
             ))}
+            {renderActionColumn && <th className="p-3 text-left font-semibold text-slate-600">Print</th>}
           </tr>
         </thead>
 
         <tbody>
           {tests.length === 0 ? (
             <tr>
-              <td colSpan={headers.length} className="p-4 text-center text-slate-500">
+              <td colSpan={headers.length + (renderActionColumn ? 1 : 0)} className="p-4 text-center text-slate-500">
                 No tests available
               </td>
             </tr>
@@ -73,6 +74,9 @@ const TestsTable = ({ tests, onEdit }) => {
                       Update
                     </button>
                   </td>
+                  {renderActionColumn && (
+                    <td className="p-2">{renderActionColumn(test)}</td>
+                  )}
                 </tr>
               );
             })

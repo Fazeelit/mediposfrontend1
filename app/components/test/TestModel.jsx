@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { apiRequest } from "@/app/authservice/api";
+import { Trash2 } from "lucide-react";
 
 const TestModal = ({ onClose, editData }) => {
   const [patients, setPatients] = useState([]);
@@ -14,8 +15,9 @@ const TestModal = ({ onClose, editData }) => {
     doctor: "",
     name: "",
     date: "",
-    status: "Pending", // Test Status
-    paymentStatus: "Pending", // Payment Status
+    mobile: "",
+    status: "Pending",
+    paymentStatus: "Pending",
     parameters: [],
     fee: 0,
     discount: 0,
@@ -44,9 +46,15 @@ const TestModal = ({ onClose, editData }) => {
   /* ================= HANDLE TEST SELECTION ================= */
   const handleTestChange = (name) => {
     const selectedTest = tests.find((t) => t.name === name);
+    if (!selectedTest) return;
 
-    const params =
-      selectedTest?.parameters?.map((p) => ({
+    // prevent duplicate test
+    const alreadyAdded = form.parameters.some((p) => p.testName === name);
+    if (alreadyAdded) return;
+
+    const newParams =
+      selectedTest.parameters?.map((p) => ({
+        testName: name,
         name: p.name || "",
         min: p.min || "",
         max: p.max || "",
@@ -56,21 +64,30 @@ const TestModal = ({ onClose, editData }) => {
         result: "",
       })) || [];
 
-    const totalFee = params.reduce((sum, p) => sum + Number(p.cost || 0), 0);
+    const updatedParams = [...form.parameters, ...newParams];
+
+    const totalFee = updatedParams.reduce(
+      (sum, p) => sum + Number(p.cost || 0),
+      0
+    );
 
     setForm((prev) => ({
       ...prev,
       name,
-      parameters: params,
+      parameters: updatedParams,
       fee: totalFee,
-      discount: prev.discount || 0,
       totalfee: Math.max(totalFee - (prev.discount || 0), 0),
     }));
   };
 
   /* ================= HANDLE FORM CHANGES ================= */
   const handleChange = (key, value) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
+    if (key === "mobile") {
+      const digits = value.replace(/\D/g, "").slice(0, 11);
+      setForm((prev) => ({ ...prev, mobile: digits }));
+    } else {
+      setForm((prev) => ({ ...prev, [key]: value }));
+    }
   };
 
   const handleParamChange = (index, key, value) => {
@@ -120,6 +137,11 @@ const TestModal = ({ onClose, editData }) => {
 
   /* ================= HANDLE SUBMIT ================= */
   const handleSubmit = async () => {
+    if (form.mobile.length !== 11) {
+      setErrorModal({ show: true, message: "Mobile number must be 11 digits." });
+      return;
+    }
+
     try {
       const res = await apiRequest("/tests/createTest", {
         method: "POST",
@@ -141,10 +163,17 @@ const TestModal = ({ onClose, editData }) => {
     }
   };
 
+  /* ================= GROUP PARAMETERS BY TEST ================= */
+  const groupedTests = form.parameters.reduce((acc, param) => {
+    if (!acc[param.testName]) acc[param.testName] = [];
+    acc[param.testName].push(param);
+    return acc;
+  }, {});
+
   return (
     <>
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4">
-        <div className="bg-white rounded-2xl shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="bg-white rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
 
           {/* HEADER */}
           <div className="bg-teal-600 text-white p-6 flex justify-between">
@@ -161,7 +190,6 @@ const TestModal = ({ onClose, editData }) => {
               handleSubmit();
             }}
           >
-
             {/* PATIENT INFO */}
             <section>
               <h3 className="font-semibold mb-4">Patient Information</h3>
@@ -204,10 +232,20 @@ const TestModal = ({ onClose, editData }) => {
                   <label className="label">Date</label>
                   <input type="date" className="input" value={form.date} onChange={(e) => handleChange("date", e.target.value)} />
                 </div>
+
+                <div>
+                  <label className="label">Mobile</label>
+                  <input
+                    className="input"
+                    placeholder="03xx-xxxxxxx"
+                    value={form.mobile}
+                    onChange={(e) => handleChange("mobile", e.target.value)}
+                  />
+                </div>
               </div>
             </section>
 
-            {/* TEST INFO */}
+            {/* TEST SELECTION */}
             <section>
               <h3 className="font-semibold mb-4">Test Information</h3>
               <div className="md:w-1/3">
@@ -225,61 +263,56 @@ const TestModal = ({ onClose, editData }) => {
               </div>
             </section>
 
-            {/* PARAMETERS */}
-            <section>
-              <div className="flex justify-between mb-3">
-                <h3 className="font-semibold">Test Parameters</h3>
-                <button type="button" onClick={addParameter} className="bg-teal-600 text-white px-3 py-1 rounded">
-                  + Add
-                </button>
-              </div>
-
-              <table className="w-full border text-sm">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="border p-2">Parameter</th>
-                    <th className="border p-2">Min</th>
-                    <th className="border p-2">Max</th>
-                    <th className="border p-2">Unit</th>
-                    <th className="border p-2">Cost</th>
-                    <th className="border p-2">Result</th>
-                    <th className="border p-2">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {form.parameters.map((p, i) => (
-                    <tr key={i}>
-                      <td className="border p-1"><input className="table-input" value={p.name} disabled /></td>
-                      <td className="border p-1"><input className="table-input" value={p.min} disabled /></td>
-                      <td className="border p-1"><input className="table-input" value={p.max} disabled /></td>
-                      <td className="border p-1"><input className="table-input" value={p.unit} disabled /></td>
-                      <td className="border p-1">
-                        <input
-                          type="number"
-                          className="table-input"
-                          value={p.cost}
-                          onChange={(e) => handleParamChange(i, "cost", e.target.value)}
-                        />
-                      </td>
-                      <td className="border p-1">
-                        <input
-                          className="table-input"
-                          value={p.result}
-                          onChange={(e) => handleParamChange(i, "result", e.target.value)}
-                        />
-                      </td>
-                      <td className="border p-1 text-center">
-                        {form.parameters.length > 1 && (
-                          <button onClick={() => removeParameter(i)} className="text-red-500">✕</button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            {/* PARAMETERS TABLE */}
+            <section className="space-y-6">
+              {Object.entries(groupedTests).map(([testName, params]) => (
+                <div key={testName} className="border rounded-lg p-4">
+                  <h3 className="font-bold text-teal-600 mb-3">{testName}</h3>
+                  <table className="w-full border text-sm text-center">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="border p-2">Parameter</th>
+                        <th className="border p-2">Min</th>
+                        <th className="border p-2">Max</th>
+                        <th className="border p-2">Unit</th>
+                        <th className="border p-2">Cost</th>
+                        <th className="border p-2">Result</th>
+                        <th className="border p-2">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {params.map((p, i) => {
+                        // find the index in the original form.parameters
+                        const paramIndex = form.parameters.findIndex(
+                          (fp) => fp.testName === p.testName && fp.name === p.name
+                        );
+                        return (
+                          <tr key={i}>
+                            <td className="border p-1">{p.name}</td>
+                            <td className="border p-1">{p.min}</td>
+                            <td className="border p-1">{p.max}</td>
+                            <td className="border p-1">{p.unit}</td>
+                            <td className="border p-1">{p.cost}</td>                           
+                            <td className="border p-1">
+                              <input className="table-input" value={p.result} onChange={(e) => handleParamChange(paramIndex, "result", e.target.value)} />
+                            </td>
+                            <td className="border p-1 text-center">
+                              <Trash2
+                                size={18}
+                                className="text-red-500 cursor-pointer mx-auto"
+                                onClick={() => removeParameter(paramIndex)}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
             </section>
 
-            {/* COST */}
+            {/* COST & STATUS */}
             <section className="grid md:grid-cols-3 gap-4">
               <div>
                 <label className="label">Fee</label>
@@ -288,12 +321,7 @@ const TestModal = ({ onClose, editData }) => {
 
               <div>
                 <label className="label">Discount</label>
-                <input
-                  type="number"
-                  className="input"
-                  value={form.discount}
-                  onChange={(e) => handleDiscountChange(e.target.value)}
-                />
+                <input type="number" className="input" value={form.discount} onChange={(e) => handleDiscountChange(e.target.value)} />
               </div>
 
               <div>
@@ -302,34 +330,21 @@ const TestModal = ({ onClose, editData }) => {
               </div>
             </section>
 
-            {/* STATUS & PAYMENT STATUS (MOVED BELOW TOTAL COST) */}
-            <section>
-              <h3 className="font-semibold mb-4">Status</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="label">Test Status</label>
-                  <select
-                    className="input"
-                    value={form.status}
-                    onChange={(e) => handleChange("status", e.target.value)}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="Completed">Completed</option>
-                  
-                  </select>
-                </div>
+            <section className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="label">Test Status</label>
+                <select className="input" value={form.status} onChange={(e) => handleChange("status", e.target.value)}>
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                </select>
+              </div>
 
-                <div>
-                  <label className="label">Payment Status</label>
-                  <select
-                    className="input"
-                    value={form.paymentStatus}
-                    onChange={(e) => handleChange("paymentStatus", e.target.value)}
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="Paid">Paid</option>                   
-                  </select>
-                </div>
+              <div>
+                <label className="label">Payment Status</label>
+                <select className="input" value={form.paymentStatus} onChange={(e) => handleChange("paymentStatus", e.target.value)}>
+                  <option value="Pending">Pending</option>
+                  <option value="Paid">Paid</option>
+                </select>
               </div>
             </section>
 
@@ -352,10 +367,7 @@ const TestModal = ({ onClose, editData }) => {
           <div className="bg-white rounded-xl p-6 w-[350px] text-center">
             <h3 className="text-green-600 text-xl font-bold mb-2">Success</h3>
             <p className="mb-4">Test added successfully.</p>
-            <button
-              onClick={() => setSuccessModal(false)}
-              className="px-4 py-2 bg-teal-600 text-white rounded"
-            >
+            <button onClick={() => setSuccessModal(false)} className="px-4 py-2 bg-teal-600 text-white rounded">
               OK
             </button>
           </div>
@@ -368,10 +380,7 @@ const TestModal = ({ onClose, editData }) => {
           <div className="bg-white rounded-xl p-6 w-[350px] text-center">
             <h3 className="text-red-600 text-xl font-bold mb-2">Unsuccessful</h3>
             <p className="mb-4">{errorModal.message}</p>
-            <button
-              onClick={() => setErrorModal({ show: false, message: "" })}
-              className="px-4 py-2 bg-red-600 text-white rounded"
-            >
+            <button onClick={() => setErrorModal({ show: false, message: "" })} className="px-4 py-2 bg-red-600 text-white rounded">
               Close
             </button>
           </div>
