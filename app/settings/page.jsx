@@ -1,0 +1,11 @@
+
+"use client";
+
+import SettingsPage from "../components/pages/SettingsPage";
+
+export default function Test() {
+  return (
+
+    <SettingsPage/>
+  );
+}
