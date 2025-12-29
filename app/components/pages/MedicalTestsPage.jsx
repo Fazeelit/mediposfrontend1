@@ -1,135 +1,88 @@
-
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
 import TestStatsCards from "../../components/test/TestStatsCards";
 import TestsTable from "../../components/test/TestTable";
 import TestModal from "../../components/test/TestModel";
 import TestParametersModal from "../../components/test/TestParametersModal";
-
-
-const dummyParameters = [
-  {
-    name: "Hemoglobin",
-    min: "12",
-    max: "16",
-    unit: "g/dL",
-    cost: 500,
-    discount: 50,
-  },
-  {
-    name: "WBC Count",
-    min: "4000",
-    max: "11000",
-    unit: "/µL",
-    cost: 700,
-    discount: 100,
-  },
-  {
-    name: "Platelets",
-    min: "150000",
-    max: "450000",
-    unit: "/µL",
-    cost: 600,
-    discount: 0,
-  },
-];
-
-const initialTests = [
-  {
-    id: "TEST-1001",
-    patientName: "Ali Khan",
-    age: "28",
-    sex: "Male",
-    testName: "Complete Blood Count",
-    testType: "Blood Test",
-    date: "2025-01-10",
-    time: "10:30",
-    fee: 1650,
-    paymentStatus: "Paid",
-    status: "Completed",
-    notes: "Normal CBC report",
-    parameters: [
-      {
-        name: "Hemoglobin",
-        min: "12",
-        max: "16",
-        result: "14",
-        unit: "g/dL",
-      },
-      {
-        name: "WBC Count",
-        min: "4000",
-        max: "11000",
-        result: "7200",
-        unit: "/µL",
-      },
-    ],
-  },
-  {
-    id: "TEST-1002",
-    patientName: "Sara Ahmed",
-    age: "35",
-    sex: "Female",
-    testName: "Platelet Test",
-    testType: "Blood Test",
-    date: "2025-01-12",
-    time: "12:15",
-    fee: 600,
-    paymentStatus: "Pending",
-    status: "In Progress",
-    notes: "",
-    parameters: [
-      {
-        name: "Platelets",
-        min: "150000",
-        max: "450000",
-        result: "210000",
-        unit: "/µL",
-      },
-    ],
-  },
-];
-
-
-// const initialTests = [];
+import { apiRequest } from "@/app/authservice/api";
 
 const MedicalTestsPage = () => {
-
- const [tests, setTests] = useState(initialTests);
+  const [tests, setTests] = useState([]);
+  const [parameters, setParameters] = useState([]);
   const [openTest, setOpenTest] = useState(false);
   const [openParams, setOpenParams] = useState(false);
   const [editTest, setEditTest] = useState(null);
 
-  // --- Main Parameters State ---
-  const [parameters, setParameters] = useState(dummyParameters);
+  /* ================= FETCH ALL TEST RECORDS ================= */
+  const fetchTests = async () => {
+    try {
+      const res = await apiRequest("/tests"); // GET all tests
+      const data = Array.isArray(res) ? res : res?.data || [];
 
-  // --- Save Test Handler ---
+      const mappedTests = data.map((t) => {
+        const totalFee = t.parameters?.reduce(
+          (sum, p) => sum + Number(p.cost || 0),
+          0
+        );
+        return {
+          ...t,
+          id: t._id || `TEST-${Date.now()}-${Math.random()}`,
+          fee: totalFee || 0,
+        };
+      });
+
+      setTests(mappedTests);
+    } catch (err) {
+      console.error("Failed to fetch tests:", err);
+    }
+  };
+
+  /* ================= FETCH ALL PARAMETERS ================= */
+  const fetchParameters = async () => {
+    try {
+      const res = await apiRequest("/testParameters"); // GET all test parameters
+      const data = Array.isArray(res) ? res : res?.data || [];
+      setParameters(data);
+    } catch (err) {
+      console.error("Failed to fetch parameters:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTests();
+    fetchParameters();
+  }, []);
+
+  /* ================= HANDLE SAVE TEST ================= */
   const handleSaveTest = (data) => {
     let totalFee = 0;
-
     data.parameters.forEach((p) => {
-      const found = parameters.find(x => x.name === p.name);
-      if (found) {
-        totalFee += Number(found.cost || 0) - Number(found.discount || 0);
+      const paramInfo = parameters.find((x) => x.name === p.name);
+      if (paramInfo) {
+        totalFee += Number(paramInfo.cost || 0);
       }
     });
 
-    data.fee = totalFee;
+    const newTest = {
+      ...data,
+      fee: totalFee,
+      id: editTest?.id || `TEST-${Date.now()}`,
+    };
 
     if (editTest) {
-      setTests(
-        tests.map((t) => (t.id === editTest.id ? { ...data, id: editTest.id } : t))
-      );
+      setTests(tests.map((t) => (t.id === editTest.id ? newTest : t)));
     } else {
-      setTests([{ ...data, id: `TEST-${Date.now()}` }, ...tests]);
+      setTests([newTest, ...tests]);
     }
 
     setOpenTest(false);
     setEditTest(null);
   };
 
+  /* ================= CALCULATE GROSS TOTAL ================= */
+  const grossTotalFee = tests.reduce((sum, t) => sum + Number(t.fee || 0), 0);
 
   return (
     <main className="p-6 space-y-6">
@@ -159,7 +112,7 @@ const MedicalTestsPage = () => {
         </div>
       </div>
 
-
+      {/* Stats & Table */}
       <TestStatsCards tests={tests} />
       <TestsTable
         tests={tests}
@@ -168,6 +121,11 @@ const MedicalTestsPage = () => {
           setOpenTest(true);
         }}
       />
+
+      {/* Gross Total Fee */}
+      <div className="mt-4 text-right font-bold text-lg">
+        Gross Total Fee: <span className="text-teal-600">{grossTotalFee}</span>
+      </div>
 
       {/* TEST MODAL */}
       {openTest && (

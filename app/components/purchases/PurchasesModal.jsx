@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
-import { X, Plus, Trash2, CheckCircle, AlertTriangle } from "lucide-react";
+import { X, Plus, Trash2 } from "lucide-react";
 import { apiRequest } from "@/app/authservice/api";
 
 const PurchaseModal = ({ onClose }) => {
   const [supplier, setSupplier] = useState("");
-  const [purchaseDate, setPurchaseDate] = useState(() => new Date().toISOString().slice(0, 10));
+  const [purchaseDate, setPurchaseDate] = useState(() =>
+    new Date().toISOString().slice(0, 10)
+  );
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [items, setItems] = useState([]);
   const [purchaseStatus, setPurchaseStatus] = useState("Draft");
@@ -15,9 +17,9 @@ const PurchaseModal = ({ onClose }) => {
   const [taxAmount, setTaxAmount] = useState(0);
   const [productsList, setProductsList] = useState([]);
   const [errors, setErrors] = useState({});
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState({ show: false, message: "" });
 
   // Fetch product list
   useEffect(() => {
@@ -29,8 +31,7 @@ const PurchaseModal = ({ onClose }) => {
         setProductsList(products.map((p) => ({ id: p._id, name: p.name })));
       } catch (err) {
         console.error(err);
-        setErrorMessage("Failed to fetch product list");
-        setShowError(true);
+        setErrorModal({ show: true, message: "Failed to fetch product list" });
       }
     };
     fetchProducts();
@@ -56,7 +57,12 @@ const PurchaseModal = ({ onClose }) => {
   const handleItemChange = (id, field, value) => {
     setItems((prev) =>
       prev.map((it) =>
-        it.id !== id ? it : { ...it, [field]: ["quantity", "price"].includes(field) ? Number(value || 0) : value }
+        it.id !== id
+          ? it
+          : {
+              ...it,
+              [field]: ["quantity", "price"].includes(field) ? Number(value || 0) : value,
+            }
       )
     );
     setErrors((prev) => ({ ...prev, [`${id}-${field}`]: "" }));
@@ -81,7 +87,8 @@ const PurchaseModal = ({ onClose }) => {
 
     items.forEach((it) => {
       if (!it.productId) temp[`${it.id}-productId`] = "Product is required";
-      if (!it.quantity || it.quantity <= 0) temp[`${it.id}-quantity`] = "Quantity must be greater than 0";
+      if (!it.quantity || it.quantity <= 0)
+        temp[`${it.id}-quantity`] = "Quantity must be greater than 0";
       if (!it.price || it.price < 0) temp[`${it.id}-price`] = "Price must be ≥ 0";
       if (!it.manufacturer) temp[`${it.id}-manufacturer`] = "Manufacturer is required";
     });
@@ -97,13 +104,19 @@ const PurchaseModal = ({ onClose }) => {
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
-    try {     
+    setLoading(true);
+    try {
       const payload = {
         supplier,
         purchaseDate,
         invoiceNumber: Number(invoiceNumber),
         totalAmount,
-        paidAmount: paymentStatus === "Paid" ? totalAmount : paymentStatus === "Partial" ? partialAmount : 0,
+        paidAmount:
+          paymentStatus === "Paid"
+            ? totalAmount
+            : paymentStatus === "Partial"
+            ? partialAmount
+            : 0,
         paymentStatus,
         purchaseStatus,
         balance,
@@ -117,55 +130,64 @@ const PurchaseModal = ({ onClose }) => {
         })),
       };
 
-      await apiRequest("/purchases/createPurchase", {
+      const response = await apiRequest("/purchases/createPurchase", {
         method: "POST",
         data: payload,
       });
 
-      setShowSuccess(true);
-
-      // Wait before closing modal
-      setTimeout(() => {
-        setShowSuccess(false); // hide success
-        onClose(); // then close main modal
-      }, 2000); // increase to 2 seconds for visibility
+      if (response?.success !== false) {
+        setSuccessModal(true);
+        setTimeout(() => {
+          setSuccessModal(false);
+          onClose();
+        }, 2000);
+      } else {
+        setErrorModal({ show: true, message: response?.message || "Failed to create purchase" });
+      }
     } catch (err) {
       console.error(err);
-      setErrorMessage(err?.response?.data?.message || "Failed to create purchase");
-      setShowError(true);
+      setErrorModal({
+        show: true,
+        message: err?.response?.data?.message || "Failed to create purchase",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
-      {/* Success Modal */}
-      {showSuccess && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[9999]">
-          <div className="bg-white p-6 rounded-xl text-center animate-fade-in">
-            <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-2" />
-            <h2 className="font-bold text-green-700 text-lg">Success</h2>
-            <p>Purchase created successfully</p>
+      {/* SUCCESS MODAL */}
+      {successModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000]">
+          <div className="bg-white rounded-xl p-6 w-[350px] text-center">
+            <h3 className="text-green-600 text-xl font-bold mb-2">Success</h3>
+            <p className="mb-4">Purchase added successfully.</p>
+            <button
+              onClick={() => setSuccessModal(false)}
+              className="px-4 py-2 bg-teal-600 text-white rounded"
+            >
+              OK
+            </button>
           </div>
         </div>
       )}
 
-      {/* Error Modal */}
-      {showError && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[9999]">
-          <div className="bg-white p-6 rounded-xl text-center animate-fade-in">
-            <AlertTriangle className="w-12 h-12 text-red-600 mx-auto mb-2" />
-            <h2 className="font-bold text-red-700 text-lg">Error</h2>
-            <p>{errorMessage}</p>
+      {/* ERROR MODAL */}
+      {errorModal.show && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000]">
+          <div className="bg-white rounded-xl p-6 w-[350px] text-center">
+            <h3 className="text-red-600 text-xl font-bold mb-2">Unsuccessful</h3>
+            <p className="mb-4">{errorModal.message}</p>
             <button
-              onClick={() => setShowError(false)}
-              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
+              onClick={() => setErrorModal({ show: false, message: "" })}
+              className="px-4 py-2 bg-red-600 text-white rounded"
             >
               Close
             </button>
           </div>
         </div>
       )}
-
 
       {/* Main Modal */}
       <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
@@ -363,9 +385,7 @@ const PurchaseModal = ({ onClose }) => {
                   onChange={(e) => setPartialAmount(Number(e.target.value))}
                   className="h-9 w-full rounded-md border border-gray-200 px-3 text-sm shadow-sm"
                 />
-                {errors.partialAmount && (
-                  <p className="text-xs text-red-600">{errors.partialAmount}</p>
-                )}
+                {errors.partialAmount && <p className="text-xs text-red-600">{errors.partialAmount}</p>}
               </div>
             )}
 
@@ -392,9 +412,10 @@ const PurchaseModal = ({ onClose }) => {
               <button
                 type="button"
                 onClick={handleSubmit}
+                disabled={loading}
                 className="h-9 px-4 py-2 rounded-md shadow text-white bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700"
               >
-                Create Purchase
+                {loading ? "Creating..." : "Create Purchase"}
               </button>
             </div>
           </div>
