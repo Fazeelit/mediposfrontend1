@@ -1,0 +1,586 @@
+[00:00:02.605] Server  LOG      ✓ Ready in 1869ms
+[00:00:08.785] Server  LOG      ○ Compiling / ...
+[00:00:12.182] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:12.631] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:00:12.631] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:00:12.631] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:00:12.631] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:00:12.631] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:00:12.631] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:04:31.932] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:04:31.932] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:04:31.932] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:04:31.932] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:04:40.847] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:13:39.759] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:13:39.759] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:13:49.771] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:15:32.240] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:17:39.989] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:19:58.560] Server  LOG      ✓ Compiled in 109ms
+[00:20:10.618] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:20:10.618] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:20:12.007] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:20:32.547] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:20:32.547] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:20:33.110] Browser ERROR   Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `ProductTable`. 
+[00:23:32.142] Server  LOG      ✓ Compiled in 125ms
+[00:27:20.177] Server  LOG      ✓ Compiled in 73ms
+[00:29:48.631] Server  LOG      ✓ Compiled in 64ms
+[00:32:40.079] Server  LOG      ✓ Compiled in 82ms
+[00:32:47.657] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/doctors/"}
+[00:32:47.657] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/doctors/"}
+[00:32:49.157] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:32:49.157] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:33:11.681] Server  LOG      ✓ Compiled in 67ms
+[00:35:13.382] Server  LOG      ✓ Compiled in 120ms
+[00:35:14.397] Browser ERROR   ./app/components/products/ProductTable.jsx:135:1
+Ecmascript file had an error
+  133 |
+  134 | export default ProductTable;
+> 135 | "use client";
+      | ^^^^^^^^^^^^^
+  136 |
+  137 | import React, { useMemo } from "react";
+  138 | import { Pen, Package } from "lucide-react";
+
+The "use client" directive must be placed before other expressions. Move it to the top of the file to resolve this issue.
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:35:14.397] Browser ERROR   ./app/components/products/ProductTable.jsx:138:15
+Ecmascript file had an error
+  136 |
+  137 | import React, { useMemo } from "react";
+> 138 | import { Pen, Package } from "lucide-react";
+      |               ^^^^^^^
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+  141 |   // Merge products with the same name and sum their stock
+
+the name `Package` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:35:14.397] Browser ERROR   ./app/components/products/ProductTable.jsx:138:10
+Ecmascript file had an error
+  136 |
+  137 | import React, { useMemo } from "react";
+> 138 | import { Pen, Package } from "lucide-react";
+      |          ^^^
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+  141 |   // Merge products with the same name and sum their stock
+
+the name `Pen` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:35:14.397] Browser ERROR   ./app/components/products/ProductTable.jsx:140:7
+Ecmascript file had an error
+  138 | import { Pen, Package } from "lucide-react";
+  139 |
+> 140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+      |       ^^^^^^^^^^^^
+  141 |   // Merge products with the same name and sum their stock
+  142 |   const mergedProducts = useMemo(() => {
+  143 |     const map = new Map();
+
+the name `ProductTable` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:35:14.397] Browser ERROR   ./app/components/products/ProductTable.jsx:137:8
+Ecmascript file had an error
+  135 | "use client";
+  136 |
+> 137 | import React, { useMemo } from "react";
+      |        ^^^^^
+  138 | import { Pen, Package } from "lucide-react";
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+
+the name `React` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:35:14.397] Browser ERROR   ./app/components/products/ProductTable.jsx:281:1
+Ecmascript file had an error
+  279 | };
+  280 |
+> 281 | export default ProductTable;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  282 |
+
+the name `default` is exported multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:35:14.397] Browser ERROR   ./app/components/products/ProductTable.jsx:137:17
+Ecmascript file had an error
+  135 | "use client";
+  136 |
+> 137 | import React, { useMemo } from "react";
+      |                 ^^^^^^^
+  138 | import { Pen, Package } from "lucide-react";
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+
+the name `useMemo` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:00.548] Server  LOG      ✓ Compiled in 159ms
+[00:36:01.394] Browser ERROR   ./app/components/products/ProductTable.jsx:135:1
+Ecmascript file had an error
+  133 |
+  134 | export default ProductTable;
+> 135 | "use client";
+      | ^^^^^^^^^^^^^
+  136 |
+  137 | import React, { useMemo } from "react";
+  138 | import { Pen, Package } from "lucide-react";
+
+The "use client" directive must be placed before other expressions. Move it to the top of the file to resolve this issue.
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:01.394] Browser ERROR   ./app/components/products/ProductTable.jsx:138:15
+Ecmascript file had an error
+  136 |
+  137 | import React, { useMemo } from "react";
+> 138 | import { Pen, Package } from "lucide-react";
+      |               ^^^^^^^
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+  141 |   // Merge products with the same name and sum their stock
+
+the name `Package` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:01.394] Browser ERROR   ./app/components/products/ProductTable.jsx:138:10
+Ecmascript file had an error
+  136 |
+  137 | import React, { useMemo } from "react";
+> 138 | import { Pen, Package } from "lucide-react";
+      |          ^^^
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+  141 |   // Merge products with the same name and sum their stock
+
+the name `Pen` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:01.394] Browser ERROR   ./app/components/products/ProductTable.jsx:140:7
+Ecmascript file had an error
+  138 | import { Pen, Package } from "lucide-react";
+  139 |
+> 140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+      |       ^^^^^^^^^^^^
+  141 |   // Merge products with the same name and sum their stock
+  142 |   const mergedProducts = useMemo(() => {
+  143 |     const map = new Map();
+
+the name `ProductTable` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:01.394] Browser ERROR   ./app/components/products/ProductTable.jsx:137:8
+Ecmascript file had an error
+  135 | "use client";
+  136 |
+> 137 | import React, { useMemo } from "react";
+      |        ^^^^^
+  138 | import { Pen, Package } from "lucide-react";
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+
+the name `React` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:01.394] Browser ERROR   ./app/components/products/ProductTable.jsx:281:1
+Ecmascript file had an error
+  279 | };
+  280 |
+> 281 | export default ProductTable;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  282 |
+
+the name `default` is exported multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:01.394] Browser ERROR   ./app/components/products/ProductTable.jsx:137:17
+Ecmascript file had an error
+  135 | "use client";
+  136 |
+> 137 | import React, { useMemo } from "react";
+      |                 ^^^^^^^
+  138 | import { Pen, Package } from "lucide-react";
+  139 |
+  140 | const ProductTable = ({ products, onEdit, lowStockOnly = false }) => {
+
+the name `useMemo` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./app/components/products/ProductTable.jsx [Client Component Browser]
+    ./app/components/pages/ProductsPage.jsx [Client Component Browser]
+    ./app/products/page.jsx [Client Component Browser]
+    ./app/products/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/components/products/ProductTable.jsx [Client Component SSR]
+    ./app/components/pages/ProductsPage.jsx [Client Component SSR]
+    ./app/products/page.jsx [Client Component SSR]
+    ./app/products/page.jsx [Server Component]
+[00:36:55.409] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:36:55.409] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:42:12.347] Server  LOG      ✓ Compiled in 88ms
+[00:42:20.794] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[00:42:21.395] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[00:42:36.301] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales/createSale"}
+[00:42:43.828] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:42:43.828] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:42:47.783] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[00:42:49.353] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:42:49.353] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:43:12.935] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[00:43:13.436] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[00:59:40.064] Server  LOG      ✓ Compiled in 80ms
+[00:59:48.230] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales/createSale"}
+[00:59:49.732] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:59:50.234] Browser LOG     API Request: {"data":"{\"stock\":55}","headers":{"Content-Type":"application/json"},"method":"PATCH","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/updateStock/695a72e0ad41bc6dfe47a827"}
+[00:59:50.779] Browser ERROR   API Request Error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"stock\":55}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":null,"maxContentLength":null,"method":"patch","timeout":1800000,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"https://mediposbackend.onrender.com/api/products/updateStock/695a72e0ad41bc6dfe47a827","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:2469:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:3273:49)\n    at async apiRequest (http://localhost:3000/_next/static/chunks/app_e75aaa23._.js:77:26)\n    at async updateStockAfterSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:108:21)\n    at async handlePrintAndCreateSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:147:17)","status":404}
+[00:59:50.779] Browser ERROR   Failed to update stock: {}
+[00:59:56.613] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[00:59:56.613] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:00:00.554] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:00:00.554] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:00:00.554] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:00:00.554] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:00:01.511] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:00:02.145] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:00:02.145] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:00:02.445] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:03:46.974] Server  LOG      ✓ Compiled in 62ms
+[01:03:53.879] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:03:54.421] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:04:00.782] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales/createSale"}
+[01:04:01.639] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:04:02.514] Browser LOG     API Request: {"data":"{\"stock\":55}","headers":{"Content-Type":"application/json"},"method":"PATCH","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/695a72e0ad41bc6dfe47a827/updateStock"}
+[01:04:03.017] Browser ERROR   API Request Error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"stock\":55}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":null,"maxContentLength":null,"method":"patch","timeout":1800000,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"https://mediposbackend.onrender.com/api/products/695a72e0ad41bc6dfe47a827/updateStock","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:2469:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:3273:49)\n    at async apiRequest (http://localhost:3000/_next/static/chunks/app_e75aaa23._.js:77:26)\n    at async updateStockAfterSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:111:21)\n    at async handlePrintAndCreateSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:151:17)","status":404}
+[01:04:03.017] Browser ERROR   Failed to update stock: {}
+[01:04:08.266] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:04:08.266] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:10:29.391] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:10:29.650] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:10:33.651] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:10:34.185] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:10:39.225] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales/createSale"}
+[01:10:40.326] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:10:40.780] Browser LOG     API Request: {"data":"{\"stock\":55}","headers":{"Content-Type":"application/json"},"method":"PATCH","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/695a72e0ad41bc6dfe47a827/updateStock"}
+[01:10:41.291] Browser ERROR   API Request Error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"stock\":55}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":null,"maxContentLength":null,"method":"patch","timeout":1800000,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"https://mediposbackend.onrender.com/api/products/695a72e0ad41bc6dfe47a827/updateStock","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:2469:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:3273:49)\n    at async apiRequest (http://localhost:3000/_next/static/chunks/app_104594f3._.js:77:26)\n    at async updateStockAfterSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js:207:21)\n    at async handlePrintAndCreateSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js:247:17)","status":404}
+[01:10:41.291] Browser ERROR   Failed to update stock: {}
+[01:10:45.789] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:10:45.789] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:13:32.751] Server  LOG      ✓ Compiled in 56ms
+[01:13:42.543] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:13:43.109] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:13:49.325] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/api/sales/createSale"}
+[01:13:50.290] Browser ERROR   API Request Error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":null,"maxContentLength":null,"method":"post","timeout":1800000,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"https://mediposbackend.onrender.com/api/api/sales/createSale","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:2469:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:3273:49)\n    at async apiRequest (http://localhost:3000/_next/static/chunks/app_104594f3._.js:77:26)\n    at async handlePrintAndCreateSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:141:25)","status":404}
+[01:13:50.290] Browser ERROR   {}
+[01:14:13.306] Server  LOG      ✓ Compiled in 80ms
+[01:14:23.013] Server  LOG      ✓ Compiled in 90ms
+[01:14:36.407] Server  LOG      ✓ Compiled in 156ms
+[01:14:46.619] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales/createSale"}
+[01:14:47.420] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:14:47.896] Browser LOG     API Request: {"data":"{\"stock\":55}","headers":{"Content-Type":"application/json"},"method":"PATCH","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/updateStock/695a72e0ad41bc6dfe47a827"}
+[01:14:48.396] Browser ERROR   API Request Error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"stock\":55}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":null,"maxContentLength":null,"method":"patch","timeout":1800000,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"https://mediposbackend.onrender.com/api/products/updateStock/695a72e0ad41bc6dfe47a827","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:2469:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:3273:49)\n    at async apiRequest (http://localhost:3000/_next/static/chunks/app_104594f3._.js:77:26)\n    at async updateStockAfterSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:108:21)\n    at async handlePrintAndCreateSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:146:17)","status":404}
+[01:14:48.396] Browser ERROR   Failed to update stock: {}
+[01:14:53.440] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:14:53.440] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:14:56.178] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:14:56.436] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:14:59.938] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:14:59.938] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:14:59.938] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:14:59.938] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:15:00.931] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:15:01.390] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:15:01.391] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:15:01.884] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:15:30.718] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:15:30.718] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:15:30.718] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:15:30.718] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:15:31.873] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:15:32.824] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:15:33.482] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:15:33.482] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:15:41.555] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[01:15:53.323] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:15:53.323] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:15:53.323] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:15:53.323] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/tests"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/expenses"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:16:05.110] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/purchases"}
+[01:16:42.788] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:42.788] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:42.788] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:42.788] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:43.790] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:16:44.736] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:16:44.921] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:16:44.921] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:16:47.304] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:47.304] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:47.304] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:47.304] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:16:48.236] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:16:49.148] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:16:50.383] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:16:50.383] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:16:58.835] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:16:59.302] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:17:08.458] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales/createSale"}
+[01:17:09.179] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:17:09.654] Browser LOG     API Request: {"data":"{\"stock\":55}","headers":{"Content-Type":"application/json"},"method":"PATCH","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/updateStock/695a72e0ad41bc6dfe47a827"}
+[01:17:13.765] Browser ERROR   API Request Error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"stock\":55}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":null,"maxContentLength":null,"method":"patch","timeout":1800000,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"https://mediposbackend.onrender.com/api/products/updateStock/695a72e0ad41bc6dfe47a827","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:2469:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:3273:49)\n    at async apiRequest (http://localhost:3000/_next/static/chunks/app_104594f3._.js:77:26)\n    at async updateStockAfterSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js:204:21)\n    at async handlePrintAndCreateSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js:242:17)","status":404}
+[01:17:13.765] Browser ERROR   Failed to update stock: {}
+[01:17:18.832] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:17:18.832] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:24:37.732] Server  LOG      ✓ Compiled in 68ms
+[01:24:47.793] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:24:47.793] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:24:47.793] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:24:47.793] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/appointments"}
+[01:24:49.162] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:24:49.162] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:24:49.162] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:24:50.251] Browser LOG     Fetched appointments: {"count":7,"data":[{"__v":0,"_id":"6946bd913b1ee94a00cff3ad","createdAt":"2025-12-20T15:15:29.260Z","date":"2025-12-22T15:30:00.000Z","doctor":"Dr. Lee","fee":700,"paidfee":0,"patient":"Mehboob","reason":"Back pain consultation","status":"Cancelled","time":"03:30 PM","updatedAt":"2025-12-20T15:15:29.260Z"},{"__v":0,"_id":"6946754a49e092195e29a436","createdAt":"2025-12-20T10:07:06.971Z","date":"2025-12-25T00:00:00.000Z","doctor":"Dr. Smith","fee":50,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Completed","time":"10:30 AM","updatedAt":"2025-12-31T03:38:08.146Z"},{"__v":0,"_id":"694e9de5a0f130730e0d327b","createdAt":"2025-12-26T14:38:29.597Z","date":"2025-12-26T00:00:00.000Z","doctor":"Dr. Michael Chen","fee":1000,"paidfee":0,"patient":"John Williams","reason":"Fever","status":"Scheduled","time":"19:38","updatedAt":"2025-12-26T14:38:29.597Z"},{"__v":0,"_id":"6946758a49e092195e29a43a","createdAt":"2025-12-20T10:08:10.721Z","date":"2025-12-26T11:15:00.000Z","doctor":"Dr. Brown","fee":75,"paidfee":0,"patient":"Jane Williams","reason":"Flu symptoms","status":"Cancelled","time":"11:15 AM","updatedAt":"2025-12-31T03:36:40.084Z"},{"__v":0,"_id":"6947cfa03fa3558ed933ec07","createdAt":"2025-12-21T10:44:48.330Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rehan Fazeel","fee":1500,"paidfee":0,"patient":"Maria Garcia","reason":"Blood pressure","status":"Confirmed","time":"18:44","updatedAt":"2025-12-31T06:55:39.092Z"},{"__v":0,"_id":"6946757d49e092195e29a438","createdAt":"2025-12-20T10:07:57.211Z","date":"2025-12-31T00:00:00.000Z","doctor":"Rameesha Fazeel","fee":1000,"paidfee":0,"patient":"John Doe","reason":"Routine checkup","status":"Confirmed","time":"21:44","updatedAt":"2025-12-31T13:44:48.552Z"},{"__v":0,"_id":"6954983ffbbbfeb2d460d5f0","createdAt":"2025-12-31T03:27:59.700Z","date":"2026-01-04T00:00:00.000Z","doctor":"Ayan Fazeel","fee":3000,"paidfee":0,"patient":"Fazeel Ahmad","reason":"Fever","status":"Confirmed","time":"10:27","updatedAt":"2026-01-04T16:21:16.720Z"}],"success":true}
+[01:24:52.156] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:24:52.731] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/getProductById/695a72e0ad41bc6dfe47a827"}
+[01:24:58.287] Browser LOG     API Request: {"data":"{\"products\":[{\"productId\":\"695a72e0ad41bc6dfe47a827\",\"name\":\"Remosol\",\"quantity\":1,\"cost\":67,\"price\":70}],\"subtotal\":70,\"discount\":0,\"totalAmount\":70,\"customerName\":\"Walk-in\",\"paymentStatus\":\"Paid\"}","headers":{"Content-Type":"application/json"},"method":"POST","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/sales/createSale"}
+[01:24:59.755] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products?name=Remosol"}
+[01:25:00.341] Browser LOG     API Request: {"data":"{\"stock\":55}","headers":{"Content-Type":"application/json"},"method":"PATCH","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products/695a72e0ad41bc6dfe47a827/updateStock"}
+[01:25:10.957] Browser ERROR   API Request Error: {"code":"ERR_BAD_REQUEST","config":{"adapter":["xhr","http","fetch"],"allowAbsoluteUrls":true,"data":"{\"stock\":55}","env":{},"headers":{"Accept":"application/json, text/plain, */*","Content-Type":"application/json"},"maxBodyLength":null,"maxContentLength":null,"method":"patch","timeout":1800000,"transformRequest":[null],"transformResponse":[null],"transitional":{"clarifyTimeoutError":false,"forcedJSONParsing":true,"silentJSONParsing":true},"url":"https://mediposbackend.onrender.com/api/products/695a72e0ad41bc6dfe47a827/updateStock","xsrfCookieName":"XSRF-TOKEN","xsrfHeaderName":"X-XSRF-TOKEN"},"message":"Request failed with status code 404","name":"AxiosError","stack":"AxiosError: Request failed with status code 404\n    at settle (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:1954:16)\n    at XMLHttpRequest.onloadend (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:2469:174)\n    at Axios.request (http://localhost:3000/_next/static/chunks/node_modules_axios_lib_99e19c7d._.js:3273:49)\n    at async apiRequest (http://localhost:3000/_next/static/chunks/app_104594f3._.js:77:26)\n    at async updateStockAfterSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:69:21)\n    at async handlePrintAndCreateSale (http://localhost:3000/_next/static/chunks/app_6d852536._.js?id=%255Bproject%255D%252Fapp%252Fcomponents%252FPOS%252FProductBill.jsx+%255Bapp-client%255D+%2528ecmascript%2529:105:17)","status":404}
+[01:25:10.957] Browser ERROR   Failed to update stock: {}
+[01:25:11.199] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:25:11.199] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}
+[01:25:17.566] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:25:17.839] Browser LOG     API Request: {"data":null,"headers":{},"method":"GET","params":null,"sendingFormData":false,"url":"https://mediposbackend.onrender.com/api/products"}

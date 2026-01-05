@@ -1,7 +1,11 @@
+"use client";
+
 import React, { useState } from "react";
 import ExpenseCard from "../../components/expense/ExpenseCard";
 import ExpensesTable from "../../components/expense/ExpwnseTable";
-import ExpenseModal from "../../components/expense/ExpenseModal";
+import ExpenseCreateModal from "../expense/ExpenseCreateModal";
+import ExpenseUpdateModal from "../expense/ExpenseUpdateModal";
+
 import { Plus, TrendingDown, Receipt } from "lucide-react";
 
 const ExpensesPage = () => {
@@ -16,41 +20,49 @@ const ExpensesPage = () => {
       amount: 45,
       status: "Paid",
     },
-      {
-    id: 2,
-    date: "2025-11-30",
-    category: "Maintenance",
-    description: "Air conditioner servicing",
-    vendor: "CoolTech Services",
-    paymentMethod: "Bank Transfer",
-    amount: 75.0,
-    status: "Pending",
-  },
-  {
-    id: 3,
-    date: "2025-12-05",
-    category: "Supplies",
-    description: "Medical consumables restock",
-    vendor: "MediSupply Inc.",
-    paymentMethod: "Card",
-    amount: 450.0,
-    status: "Cancelled",
-
-  },
+    {
+      id: 2,
+      date: "2025-11-30",
+      category: "Maintenance",
+      description: "Air conditioner servicing",
+      vendor: "CoolTech Services",
+      paymentMethod: "Bank Transfer",
+      amount: 75.0,
+      status: "Pending",
+    },
+    {
+      id: 3,
+      date: "2025-12-05",
+      category: "Supplies",
+      description: "Medical consumables restock",
+      vendor: "MediSupply Inc.",
+      paymentMethod: "Card",
+      amount: 450.0,
+      status: "Cancelled",
+    },
   ]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editData, setEditData] = useState(null);
 
+  // Handle save (create or update)
   const handleSave = (expense) => {
     if (editData) {
-      setExpenses(expenses.map((e) => (e.id === editData.id ? { ...expense, id: editData.id } : e)));
+      // Update existing expense
+      setExpenses(
+        expenses.map((e) =>
+          e.id === editData.id ? { ...expense, id: editData.id } : e
+        )
+      );
     } else {
+      // Add new expense
       setExpenses([...expenses, { ...expense, id: Date.now() }]);
     }
     setEditData(null);
+    setModalOpen(false);
   };
 
+  // Handle edit click
   const handleEdit = (expense) => {
     setEditData(expense);
     setModalOpen(true);
@@ -62,11 +74,16 @@ const ExpensesPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Expenses</h1>
-          <p className="text-slate-600 mt-1">Track and manage business expenses</p>
+          <p className="text-slate-600 mt-1">
+            Track and manage business expenses
+          </p>
         </div>
         <button
           className="inline-flex items-center gap-2 rounded-md text-sm font-medium h-9 px-4 py-2 text-white bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 shadow-lg hover:border-none"
-          onClick={() => setModalOpen(true)}
+          onClick={() => {
+            setEditData(null); // Ensure create modal
+            setModalOpen(true);
+          }}
         >
           <Plus className="w-5 h-5" />
           Add Expense
@@ -95,10 +112,18 @@ const ExpensesPage = () => {
       {/* Expenses Table */}
       <ExpensesTable data={expenses} onEdit={handleEdit} />
 
-      {/* Add/Edit Modal */}
-      {modalOpen && (
-        <ExpenseModal
-         isOpen={modalOpen}
+      {/* Conditional Modal: Create or Update */}
+      {modalOpen && !editData && (
+        <ExpenseCreateModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          onSave={handleSave}
+        />
+      )}
+
+      {modalOpen && editData && (
+        <ExpenseUpdateModal
+          isOpen={modalOpen}
           onClose={() => {
             setModalOpen(false);
             setEditData(null);

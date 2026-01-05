@@ -155,6 +155,13 @@ const TestModal = ({ onClose, editData }) => {
 
       if (res?.success) {
         setSuccessModal(true);
+
+        // Automatically close modal after 1.2 seconds
+        setTimeout(() => {
+          setSuccessModal(false);
+          onClose(); // Close the TestModal
+        }, 1200);
+
       } else {
         setErrorModal({ show: true, message: res.message || "Failed to save test." });
       }
@@ -282,17 +289,16 @@ const TestModal = ({ onClose, editData }) => {
                     </thead>
                     <tbody>
                       {params.map((p, i) => {
-                        // find the index in the original form.parameters
                         const paramIndex = form.parameters.findIndex(
                           (fp) => fp.testName === p.testName && fp.name === p.name
                         );
                         return (
-                          <tr key={i}>
+                          <tr key={paramIndex}>
                             <td className="border p-1">{p.name}</td>
                             <td className="border p-1">{p.min}</td>
                             <td className="border p-1">{p.max}</td>
                             <td className="border p-1">{p.unit}</td>
-                            <td className="border p-1">{p.cost}</td>                           
+                            <td className="border p-1">{p.cost}</td>
                             <td className="border p-1">
                               <input className="table-input" value={p.result} onChange={(e) => handleParamChange(paramIndex, "result", e.target.value)} />
                             </td>
@@ -367,9 +373,6 @@ const TestModal = ({ onClose, editData }) => {
           <div className="bg-white rounded-xl p-6 w-[350px] text-center">
             <h3 className="text-green-600 text-xl font-bold mb-2">Success</h3>
             <p className="mb-4">Test added successfully.</p>
-            <button onClick={() => setSuccessModal(false)} className="px-4 py-2 bg-teal-600 text-white rounded">
-              OK
-            </button>
           </div>
         </div>
       )}

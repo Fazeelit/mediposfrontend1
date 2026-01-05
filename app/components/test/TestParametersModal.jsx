@@ -108,7 +108,7 @@ const TestParametersModal = ({ tests: propTests, setTests: propSetTests, onClose
   return (
     <>
       <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full h-[550px] overflow-y-auto">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full h-[550px] overflow-y-auto">
 
           {/* Header */}
           <div className="bg-gradient-to-r from-teal-500 to-teal-600 text-white p-6 flex justify-between items-center">

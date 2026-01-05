@@ -1,27 +1,36 @@
 "use client";
 
-import { Trash2, Minus, Plus, ShoppingCart, User, Banknote, Check } from "lucide-react";
+import { Trash2, Minus, Plus, ShoppingCart, Check } from "lucide-react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function CartCard({ cart, removeItem, increaseQty, decreaseQty }) {
   const router = useRouter();
+  const [discount, setDiscount] = useState(0);
+
   const cartWithQty = cart.map((item) => ({ ...item, qty: item.qty || 1 }));
 
-  const subtotal = cartWithQty.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const tax = subtotal * 0.12;
-  const total = subtotal + tax;
+  const subtotal = cartWithQty.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
 
-  // ---------------- HANDLE PRINT BILL ----------------
+  const total = Math.max(subtotal - Number(discount || 0), 0);
+
   const handlePrintBill = () => {
     if (cartWithQty.length === 0) return;
-    localStorage.setItem("printCart", JSON.stringify(cartWithQty));
-    router.push("/Print"); // Navigate to PrintBill page
+    localStorage.setItem(
+      "printCart",
+      JSON.stringify({ items: cartWithQty, discount, subtotal, total })
+    );
+    router.push("/Print");
   };
 
   return (
     <div className="space-y-4 flex flex-col h-full w-full">
       <div className="rounded-xl shadow-xl bg-gradient-to-br from-white to-slate-50 flex flex-col mt-5 min-h-[65vh]">
+
         {/* Header */}
         <div className="p-6 border-b border-slate-200 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-t-lg">
           <div className="font-semibold flex items-center justify-between">
@@ -51,9 +60,14 @@ export default function CartCard({ cart, removeItem, increaseQty, decreaseQty })
           ) : (
             <div className="space-y-3">
               {cartWithQty.map((item, index) => (
-                <div key={item._id || item.id || index} className="bg-white rounded-xl p-3 shadow-sm border border-slate-100">
+                <div
+                  key={item._id || item.id || index}
+                  className="bg-white rounded-xl p-3 shadow-sm border border-slate-100"
+                >
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-medium text-slate-900 text-sm">{item.name}</h4>
+                    <h4 className="font-medium text-slate-900 text-sm">
+                      {item.name}
+                    </h4>
                     <button
                       onClick={() => removeItem(index)}
                       className="text-red-500 hover:bg-red-50 h-6 w-6 rounded-md flex items-center justify-center"
@@ -64,26 +78,38 @@ export default function CartCard({ cart, removeItem, increaseQty, decreaseQty })
 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
+
+                      {/* DECREASE */}
                       <button
                         onClick={() => decreaseQty(item._id || item.id)}
-                        className="border border-gray-300 rounded-md h-7 w-7 flex items-center justify-center hover:bg-slate-100"
+                        className="bg-teal-500 hover:bg-teal-600
+                          rounded-md h-7 w-7 flex items-center justify-center"
                       >
-                        <Minus className="w-3 h-3 text-gray-400" />
+                        <Minus className="w-3 h-3 text-white" />
                       </button>
 
-                      <span className="w-8 text-center font-semibold text-slate-600">{item.qty}</span>
+                      <span className="w-8 text-center font-semibold text-slate-600">
+                        {item.qty}
+                      </span>
 
+                      {/* INCREASE */}
                       <button
                         onClick={() => increaseQty(item._id || item.id)}
-                        className="border border-gray-300 rounded-md h-7 w-7 flex items-center justify-center hover:bg-slate-100"
+                        className="bg-teal-500 hover:bg-teal-600
+                          rounded-md h-7 w-7 flex items-center justify-center"
                       >
-                        <Plus className="w-3 h-3 text-gray-400" />
+                        <Plus className="w-3 h-3 text-white" />
                       </button>
+
                     </div>
 
                     <div className="text-right">
-                      <p className="text-xs text-slate-500">Rs.{item.price.toFixed(2)} each</p>
-                      <p className="font-bold text-teal-600">Rs.{(item.qty * item.price).toFixed(2)}</p>
+                      <p className="text-xs text-slate-500">
+                        Rs.{item.price.toFixed(2)} each
+                      </p>
+                      <p className="font-bold text-teal-600">
+                        Rs.{(item.qty * item.price).toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -94,15 +120,22 @@ export default function CartCard({ cart, removeItem, increaseQty, decreaseQty })
 
         {/* Footer */}
         {cart.length > 0 && (
-          <div className="border-t border-slate-200 p-4 space-y-2 bg-slate-50">
+          <div className="border-t border-slate-200 p-4 space-y-3 bg-slate-50">
             <div className="flex justify-between text-sm">
               <span className="text-slate-600">Subtotal</span>
               <span className="font-medium">Rs.{subtotal.toFixed(2)}</span>
             </div>
 
-            <div className="flex justify-between text-sm">
-              <span className="text-slate-600">Tax</span>
-              <span className="font-medium">Rs.{tax.toFixed(2)}</span>
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-slate-600">Discount</span>
+              <input
+                type="number"
+                min="0"
+                value={discount}
+                onChange={(e) => setDiscount(e.target.value)}
+                className="w-24 border rounded-md px-2 py-1 text-right text-sm"
+                placeholder="0"
+              />
             </div>
 
             <div className="flex justify-between text-lg font-bold pt-2 border-t border-slate-300">
@@ -111,7 +144,9 @@ export default function CartCard({ cart, removeItem, increaseQty, decreaseQty })
             </div>
 
             <button
-              className="w-full h-12 bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-md font-semibold flex items-center justify-center mt-3 shadow-lg hover:opacity-90"
+              className="w-full h-12 bg-gradient-to-r from-teal-500 to-teal-600
+                text-white rounded-md font-semibold flex items-center
+                justify-center mt-3 shadow-lg hover:opacity-90"
               onClick={handlePrintBill}
             >
               <Check className="w-5 h-5 mr-2" /> Print Bill

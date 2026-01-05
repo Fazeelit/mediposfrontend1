@@ -1,47 +1,67 @@
 "use client";
 
 import React from "react";
-import { ShoppingBag } from "lucide-react";
+import { Package } from "lucide-react";
 
-const PurchasesTable = ({ purchases }) => {
+const ProductTable = ({ products = [] }) => {
   return (
-    <div className="rounded-xl border-0 shadow-lg bg-white/80 backdrop-blur">
-      <div className="overflow-x-auto p-0">
-        <table className="w-full caption-bottom text-sm">
+    <div className="rounded-xl shadow-lg bg-white/80 backdrop-blur">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          {/* ================= HEADER ================= */}
           <thead>
-            <tr className="border-b border-gray-300 text-gray-400 bg-slate-50">
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Purchase #</th>
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Supplier</th>
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Date</th>
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Invoice</th>
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Items</th>
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Amount</th>
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Payment</th>
-              <th className="h-10 px-2 text-left font-semibold text-gray-500">Status</th>
+            <tr className="border-b bg-slate-50 text-gray-500">
+              <th className="h-10 px-3 text-left font-semibold">Product Name</th>
+              <th className="h-10 px-3 text-left font-semibold">Category</th>
+              <th className="h-10 px-3 text-left font-semibold">Price</th>
+              <th className="h-10 px-3 text-left font-semibold">Stock</th>
+              <th className="h-10 px-3 text-left font-semibold">SKU</th>
+              <th className="h-10 px-3 text-left font-semibold">Status</th>
+              <th className="h-10 px-3 text-left font-semibold">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {purchases.length === 0 ? (
-              <tr>
-                <td colSpan={8}>
-                  <div className="text-center py-12 text-slate-500">
-                    <ShoppingBag className="w-12 h-12 mx-auto mb-3 text-slate-300" />
-                    <p className="text-lg font-medium">No purchases found</p>
-                    <p className="text-sm">Try adjusting your search or filters</p>
+
+          {/* ================= BODY ================= */}
+          <tbody className="[&_tr:last-child]:border-0">
+            {products.length === 0 ? (
+              /* ---------- EMPTY STATE ---------- */
+              <tr key="no-products">
+                <td colSpan={7}>
+                  <div className="text-center py-14 text-slate-500">
+                    <Package className="w-12 h-12 mx-auto mb-3 text-slate-300" />
+                    <p className="text-lg font-medium">No products found</p>
+                    <p className="text-sm">Try adjusting your filters or adding new products</p>
                   </div>
                 </td>
               </tr>
             ) : (
-              purchases.map((p) => (
-                <tr key={p.id} className="border-b border-b-gray-100 hover:bg-slate-50">
-                  <td className="p-2">{p.purchasesNumber || "-"}</td>
-                  <td className="p-2">{p.supplier || "-"}</td>
-                  <td className="p-2">{p.date || "-"}</td>
-                  <td className="p-2">{p.invoice || "-"}</td>
-                  <td className="p-2">{p.items || "-"}</td>
-                  <td className="p-2">{p.amount || 0}</td>
-                  <td className="p-2">{p.payment || "-"}</td>
-                  <td className="p-2">{p.status || "-"}</td>
+              products.map((product) => (
+                /* ---------- PRODUCT ROW ---------- */
+                <tr
+                  key={product._id ?? product.id ?? Math.random()} // ✅ unique key
+                  className="border-b border-gray-100 hover:bg-slate-50 transition"
+                >
+                  <td className="px-3 py-2 font-medium">{product.name ?? "-"}</td>
+                  <td className="px-3 py-2">{product.category ?? "-"}</td>
+                  <td className="px-3 py-2">{product.price?.toLocaleString() ?? 0}</td>
+                  <td className="px-3 py-2">{product.stock ?? 0}</td>
+                  <td className="px-3 py-2">{product.sku ?? "-"}</td>
+                  <td className="px-3 py-2">
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        product.status === "Active"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {product.status ?? "Inactive"}
+                    </span>
+                  </td>
+                  <td className="px-3 py-2">
+                    <button className="px-2 py-1 bg-blue-600 text-white text-xs rounded-md hover:bg-blue-700">
+                      Edit
+                    </button>
+                  </td>
                 </tr>
               ))
             )}
@@ -52,4 +72,4 @@ const PurchasesTable = ({ purchases }) => {
   );
 };
 
-export default PurchasesTable;
+export default ProductTable;

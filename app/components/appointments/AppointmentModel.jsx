@@ -5,6 +5,8 @@ import { X, CheckCircle, AlertTriangle } from "lucide-react";
 import { apiRequest } from "@/app/authservice/api";
 
 const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
+  const [patients, setPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const [patient, setPatient] = useState("");
   const [doctor, setDoctor] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
@@ -14,12 +16,42 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
   const [reason, setReason] = useState("");  
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
-
-  // Success/Error modal state
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Fetch patients
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const res = await apiRequest("/patients");
+        if (res?.success && Array.isArray(res.data)) {
+          setPatients(res.data.map(p => p.name));
+        }
+      } catch (err) {
+        console.error("Failed to fetch patients:", err);
+      }
+    };
+    fetchPatients();
+  }, []);
+
+  // Fetch doctors
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const res = await apiRequest("/doctors");
+        if (res?.success && Array.isArray(res.data)) {
+          // Expecting res.data = [{name: "Dr. A", fee: 100}, ...]
+          setDoctors(res.data.map(d => ({ name: d.name, fee: d.fee })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch doctors:", err);
+      }
+    };
+    fetchDoctors();
+  }, []);
+
+  // Initialize form if editing
   useEffect(() => {
     if (appointment) {
       setPatient(appointment.patient || "");
@@ -32,27 +64,34 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
     }
   }, [appointment]);
 
+  // Update fee when doctor changes
+  useEffect(() => {
+    const selectedDoctor = doctors.find(d => d.name === doctor);
+    if (selectedDoctor) {
+      setFee(selectedDoctor.fee);
+    } else {
+      setFee("");
+    }
+  }, [doctor, doctors]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation
     let errors = {};
     if (!patient) errors.patient = "Patient is required.";
     if (!doctor) errors.doctor = "Doctor is required.";
     if (!date) errors.date = "Date is required.";
     if (!time) errors.time = "Time is required.";
     if (!fee) errors.fee = "Fee is required.";
-    if (!fee) errors.reason = "Fee is required.";
+    if (!reason) errors.reason = "Reason is required.";
 
     setFormErrors(errors);
-
     if (Object.keys(errors).length > 0) return;
 
     const newAppointment = { patient, doctor, date, time, fee, status, reason };
 
     try {
       setLoading(true);
-
       if (appointment && onUpdate) {
         await onUpdate({ ...appointment, ...newAppointment });
       } else {
@@ -61,14 +100,13 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
           data: newAppointment,
         });
       }
-
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
         onClose();
       }, 1500);
     } catch (error) {
-      console.error("Error creating/updating appointment:", error);
+      console.error(error);
       setErrorMessage(error?.response?.data?.message || "Failed to save appointment.");
       setShowError(true);
     } finally {
@@ -78,7 +116,7 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
 
   return (
     <>
-      {/* Success Modal */}
+      {/* Success / Error Modals */}
       {showSuccess && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[9999]">
           <div className="bg-white p-6 rounded-xl shadow-xl text-center animate-fadeIn scale-110">
@@ -88,8 +126,6 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
           </div>
         </div>
       )}
-
-      {/* Error Modal */}
       {showError && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-[9999]">
           <div className="bg-white p-6 rounded-xl shadow-xl text-center animate-fadeIn scale-110">
@@ -109,7 +145,6 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
       {/* Main Modal */}
       <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[9998] flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-          {/* Header */}
           <div className="sticky top-0 bg-gradient-to-r from-teal-500 to-teal-600 text-white p-6 rounded-t-2xl flex justify-between items-center">
             <h2 className="text-2xl font-bold">{appointment ? "Edit Appointment" : "New Appointment"}</h2>
             <button onClick={onClose} className="p-2 hover:bg-white/20 rounded-lg transition-colors">
@@ -117,7 +152,6 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
             </button>
           </div>
 
-          {/* Form */}
           <form className="p-6 space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Patient */}
@@ -129,13 +163,11 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
                   onChange={(e) => setPatient(e.target.value)}
                 >
                   <option value="">Select patient</option>
-                  <option value="Absara">Absara - 3234534</option>
-                  <option value="John Williams">John Williams - +1-555-1001</option>
-                  <option value="Maria Garcia">Maria Garcia - +1-555-1003</option>
+                  {patients.map((p, idx) => (
+                    <option key={idx} value={p}>{p}</option>
+                  ))}
                 </select>
-                {formErrors.patient && (
-                  <p className="text-red-600 text-xs mt-1">{formErrors.patient}</p>
-                )}
+                {formErrors.patient && <p className="text-red-600 text-xs mt-1">{formErrors.patient}</p>}
               </div>
 
               {/* Doctor */}
@@ -147,13 +179,11 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
                   onChange={(e) => setDoctor(e.target.value)}
                 >
                   <option value="">Select doctor</option>
-                  <option value="Dr. Sarah Johnson">Dr. Sarah Johnson</option>
-                  <option value="Dr. Michael Chen">Dr. Michael Chen</option>
-                  <option value="Dr. Emily Rodriguez">Dr. Emily Rodriguez</option>
+                  {doctors.map((d, idx) => (
+                    <option key={idx} value={d.name}>{d.name}</option>
+                  ))}
                 </select>
-                {formErrors.doctor && (
-                  <p className="text-red-600 text-xs mt-1">{formErrors.doctor}</p>
-                )}
+                {formErrors.doctor && <p className="text-red-600 text-xs mt-1">{formErrors.doctor}</p>}
               </div>
 
               {/* Date */}
@@ -165,9 +195,7 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                 />
-                {formErrors.date && (
-                  <p className="text-red-600 text-xs mt-1">{formErrors.date}</p>
-                )}
+                {formErrors.date && <p className="text-red-600 text-xs mt-1">{formErrors.date}</p>}
               </div>
 
               {/* Time */}
@@ -179,9 +207,7 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                 />
-                {formErrors.time && (
-                  <p className="text-red-600 text-xs mt-1">{formErrors.time}</p>
-                )}
+                {formErrors.time && <p className="text-red-600 text-xs mt-1">{formErrors.time}</p>}
               </div>
 
               {/* Fee */}
@@ -194,9 +220,7 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
                   onChange={(e) => setFee(e.target.value)}
                   step="0.01"
                 />
-                {formErrors.fee && (
-                  <p className="text-red-600 text-xs mt-1">{formErrors.fee}</p>
-                )}
+                {formErrors.fee && <p className="text-red-600 text-xs mt-1">{formErrors.fee}</p>}
               </div>
 
               {/* Status */}
@@ -225,9 +249,7 @@ const AppointmentModal = ({ onClose, onUpdate, appointment = null }) => {
                 onChange={(e) => setReason(e.target.value)}
                 rows={3}
               />
-              {formErrors.reason && (
-                  <p className="text-red-600 text-xs mt-1">{formErrors.reason}</p>
-                )}
+              {formErrors.reason && <p className="text-red-600 text-xs mt-1">{formErrors.reason}</p>}
             </div>
 
             {/* Buttons */}

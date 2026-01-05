@@ -4,13 +4,12 @@ import { useState, useEffect } from "react";
 import { apiRequest } from "@/app/authservice/api";
 
 import Header from "../../components/appointments/Header";
-import Calendar from "../../components/appointments/Calender";
 import AppointmentList from "../../components/appointments/AppointmentList";
 import AppointmentModal from "../../components/appointments/AppointmentModel";
+import AppointmentUpdateModal from "../../components/appointments/AppointmentUpdateModel"; // fixed typo
 
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingAppointment, setEditingAppointment] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,9 +20,8 @@ const AppointmentsPage = () => {
       setLoading(true);
       const res = await apiRequest("/appointments", { method: "GET" });
 
-      console.log("Fetched appointments:", res); // 🔍 Debug API response
+      console.log("Fetched appointments:", res);
 
-      // Adjust depending on how apiRequest returns data
       const data = res?.data?.data || res?.data || [];
       setAppointments(data);
     } catch (error) {
@@ -41,9 +39,9 @@ const AppointmentsPage = () => {
   /* ---------------- CREATE APPOINTMENT ---------------- */
   const handleCreate = async (newAppointment) => {
     try {
-      const res = await apiRequest("/appointments", {
+      const res = await apiRequest("/appointments/createAppointment", {
         method: "POST",
-        body: newAppointment,
+        data: newAppointment, // use data for apiRequest
       });
 
       const created = res?.data || res;
@@ -57,9 +55,9 @@ const AppointmentsPage = () => {
   /* ---------------- UPDATE APPOINTMENT ---------------- */
   const handleUpdate = async (updatedAppointment) => {
     try {
-      const res = await apiRequest(`/appointments/${updatedAppointment._id}`, {
+      const res = await apiRequest(`/appointments/updateAppointment/${updatedAppointment._id}`, {
         method: "PUT",
-        body: updatedAppointment,
+        data: updatedAppointment, // use data
       });
 
       const updated = res?.data || res;
@@ -73,7 +71,7 @@ const AppointmentsPage = () => {
   };
 
   return (
-    <main className="flex flex-col md:flex-row gap-4 p-4">
+    <main className="flex flex-col gap-4 p-4">
       <div className="space-y-6 w-full">
         {/* Header */}
         <Header
@@ -85,35 +83,34 @@ const AppointmentsPage = () => {
           }}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Calendar */}
-          <Calendar
-            selectedDate={selectedDate}
-            onSelectDate={setSelectedDate}
-            events={appointments.map((a) => new Date(a.date))}
-          />
-
-          {/* Appointment List */}
-          <AppointmentList
-            loading={loading}
-            date="All Appointments"
-            appointments={appointments}
-            onEdit={(appt) => {
-              setEditingAppointment(appt);
-              setIsModalOpen(true);
-            }}
-          />
-        </div>
+        {/* Appointment List */}
+        <AppointmentList
+          loading={loading}
+          date="All Appointments"
+          appointments={appointments}
+          onEdit={(appt) => {
+            setEditingAppointment(appt);
+            setIsModalOpen(true);
+          }}
+        />
       </div>
 
       {/* Modal */}
       {isModalOpen && (
-        <AppointmentModal
-          onClose={() => setIsModalOpen(false)}
-          onCreate={handleCreate}
-          onUpdate={handleUpdate}
-          appointment={editingAppointment}
-        />
+        <>
+          {!editingAppointment ? (
+            <AppointmentModal
+              onClose={() => setIsModalOpen(false)}
+              onCreate={handleCreate}
+            />
+          ) : (
+            <AppointmentUpdateModal
+              onClose={() => setIsModalOpen(false)}
+              onUpdate={handleUpdate}
+              appointment={editingAppointment}
+            />
+          )}
+        </>
       )}
     </main>
   );

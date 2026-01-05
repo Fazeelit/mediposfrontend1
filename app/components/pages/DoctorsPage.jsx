@@ -3,12 +3,14 @@
 import React, { useState, useEffect } from "react";
 import DoctorCard from "../doctor/DoctorCard";
 import DoctorEditModel from "../../components/doctor/DoctorEditModel";
+import DoctorCreateModel from "../../components/doctor/DoctorCreateModel"; // Already imported
 import { apiRequest } from "@/app/authservice/api";
 import { toast } from "react-hot-toast";
 
 const DoctorsPage = () => {
   const [doctors, setDoctors] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // New state for create modal
   const [editingDoctorId, setEditingDoctorId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,10 +41,7 @@ const DoctorsPage = () => {
             <p className="text-slate-600 mt-1">Manage medical staff and consultants</p>
           </div>
           <button
-            onClick={() => {
-              setEditingDoctorId(null); // New doctor
-              setIsModalOpen(true);
-            }}
+            onClick={() => setIsCreateModalOpen(true)} // Open create modal
             className="inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium h-9 px-4 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-lg hover:from-teal-600 hover:to-teal-700"
           >
             Add Doctor
@@ -67,7 +66,7 @@ const DoctorsPage = () => {
         )}
       </div>
 
-      {/* Doctor Edit/Add Modal */}
+      {/* Doctor Edit Modal */}
       {isModalOpen && (
         <DoctorEditModel
           doctorId={editingDoctorId} // Modal fetches doctor internally
@@ -82,6 +81,16 @@ const DoctorsPage = () => {
               // Add new doctor
               setDoctors((prev) => [...prev, updatedDoctor]);
             }
+          }}
+        />
+      )}
+
+      {/* Doctor Create Modal */}
+      {isCreateModalOpen && (
+        <DoctorCreateModel
+          onClose={() => setIsCreateModalOpen(false)}
+          onSave={(newDoctor) => {
+            setDoctors((prev) => [...prev, newDoctor]);
           }}
         />
       )}

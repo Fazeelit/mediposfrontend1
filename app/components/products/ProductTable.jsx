@@ -1,13 +1,29 @@
 "use client"; // required for client-side state
 
-
-
-
-
-import React from "react";
+import React, { useMemo } from "react";
 import { Pen, Package } from "lucide-react";
 
 const ProductTable = ({ products, onEdit }) => {
+  // Merge products with the same name and sum their stock
+  const mergedProducts = useMemo(() => {
+    const map = new Map();
+
+    products.forEach((p) => {
+      const key = p.name.trim().toLowerCase(); // normalize name
+      if (map.has(key)) {
+        const existing = map.get(key);
+        map.set(key, {
+          ...existing,
+          stock: existing.stock + (Number(p.stock) || 0),
+        });
+      } else {
+        map.set(key, { ...p, stock: Number(p.stock) || 0 });
+      }
+    });
+
+    return Array.from(map.values());
+  }, [products]);
+
   return (
     <div className="rounded-xl border-0 shadow-lg bg-white/80 backdrop-blur p-0 overflow-x-auto">
       <div className="relative w-full overflow-auto">
@@ -25,7 +41,7 @@ const ProductTable = ({ products, onEdit }) => {
           </thead>
 
           <tbody className="[&_tr:last-child]:border-0">
-            {products.length === 0 ? (
+            {mergedProducts.length === 0 ? (
               <tr>
                 <td colSpan={7}>
                   <div className="text-center py-12 text-slate-500">
@@ -36,8 +52,8 @@ const ProductTable = ({ products, onEdit }) => {
                 </td>
               </tr>
             ) : (
-              products.map((p) => (
-                <tr key={p.id} className="border-b border-b-gray-100 transition-colors hover:bg-slate-50">
+              mergedProducts.map((p) => (
+                <tr key={p.id || p.name} className="border-b border-b-gray-100 transition-colors hover:bg-slate-50">
                   {/* Product Name & Manufacturer */}
                   <td className="p-2 align-middle">
                     <div>
@@ -60,7 +76,7 @@ const ProductTable = ({ products, onEdit }) => {
                   <td className="p-2 align-middle">
                     <div className="text-sm">
                       <p className="font-semibold text-slate-900">Rs.{p.price}</p>
-                      {p.cost && <p className="text-xs text-slate-500">Cost:Rs.{p.cost}</p>}
+                      {p.cost && <p className="text-xs text-slate-500">Cost: Rs.{p.cost}</p>}
                     </div>
                   </td>
 
@@ -68,27 +84,29 @@ const ProductTable = ({ products, onEdit }) => {
                   <td className="p-2 align-middle">
                     <div className="flex flex-col gap-1">
                       <div className="flex items-center gap-2">
-                        <span className={`font-semibold {p.stock <= 12 ? "text-amber-600" : "text-emerald-600"}`}>
+                        <span className={`font-semibold ${p.stock <= 10 ? "text-amber-600" : "text-emerald-600"}`}>
                           {p.stock}
                         </span>
                         <span className="text-xs text-slate-500">{p.unit}</span>
                       </div>
+
+                      {/* Show Low Stock badge only if total stock <= 10 */}
                       {p.stock <= 10 && (
                         <div className="w-20 inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold shadow bg-amber-100 text-amber-800 border-amber-200">
                           Low Stock
                         </div>
                       )}
-
                     </div>
                   </td>
 
                   {/* Status Badge */}
                   <td className="p-2 align-middle">
                     <div
-                      className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold shadow ${p.status === "Active"
+                      className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold shadow ${
+                        p.status === "Active"
                           ? "bg-emerald-100 text-emerald-800 border-emerald-200"
                           : "bg-red-100 text-red-800 border-red-200"
-                        }`}
+                      }`}
                     >
                       {p.status}
                     </div>

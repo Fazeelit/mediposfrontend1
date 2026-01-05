@@ -14,6 +14,7 @@ const routeTitleMap = {
   "/doctors": "Doctors",
   "/products": "Products",
   "/purchases": "Purchases",
+  "/suppliers": "Suppliers",
   "/sales": "Sales",
   "/tests": "Tests",
   "/expenses": "Expenses",

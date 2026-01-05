@@ -7,46 +7,119 @@ import { apiRequest } from "@/app/authservice/api";
 
 export default function PrintBillPage() {
   const router = useRouter();
-  const [cart, setCart] = useState([]);
-  const [mounted, setMounted] = useState(false);
+  const [items, setItems] = useState([]);
   const [discount, setDiscount] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({ show: false, success: false, message: "" });
 
   useEffect(() => {
     setMounted(true);
-    const storedCart = localStorage.getItem("printCart");
-    if (storedCart) setCart(JSON.parse(storedCart));
+    const stored = localStorage.getItem("printCart");
+    if (!stored) return;
+    const parsed = JSON.parse(stored);
+    if (Array.isArray(parsed)) {
+      setItems(parsed);
+      setDiscount(0);
+    } else {
+      setItems(parsed.items || []);
+      setDiscount(Number(parsed.discount || 0));
+    }
   }, []);
 
   if (!mounted) return null;
-
-  if (!cart || cart.length === 0)
+  if (items.length === 0)
     return (
       <div className="p-4 bg-white rounded shadow text-center text-gray-500">
         No items to print.
       </div>
     );
 
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const total = subtotal - discount;
-
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const total = Math.max(subtotal - discount, 0);
   const handleBack = () => router.back();
 
+  /* =========================
+     UPDATE STOCK AFTER SALE
+     ========================= */
+  const updateStockAfterSale = async () => {
+    try {
+      // 1️⃣ Fetch all products
+      const res = await apiRequest("/products", { method: "GET" });
+      const allProducts = res?.data || [];
+
+      // 2️⃣ Group products by name
+      const productMap = new Map();
+      allProducts.forEach((p) => {
+        const key = p.name.trim().toLowerCase();
+        if (productMap.has(key)) {
+          const existing = productMap.get(key);
+          productMap.set(key, {
+            ...existing,
+            totalStock: existing.totalStock + Number(p.stock || 0),
+            ids: [...existing.ids, p._id],
+          });
+        } else {
+          productMap.set(key, {
+            ...p,
+            totalStock: Number(p.stock || 0),
+            ids: [p._id],
+          });
+        }
+      });
+
+      // 3️⃣ Deduct sold quantities from same-name products
+      for (const soldItem of items) {
+        const key = soldItem.name.trim().toLowerCase();
+        if (!productMap.has(key)) continue;
+
+        let remainingQty = soldItem.qty;
+        const productData = productMap.get(key);
+
+        for (const id of productData.ids) {
+          const product = allProducts.find((p) => p._id === id);
+          if (!product) continue;
+
+          const currentStock = Number(product.stock || 0);
+          if (remainingQty <= 0) break;
+
+          const deduction = Math.min(currentStock, remainingQty);
+          const newStock = currentStock - deduction;
+
+          // ✅ Correct API endpoint for App Router
+          await apiRequest(`/products/updateStock/${id}`, {
+            method: "PATCH",
+            data: { stock: newStock },
+          });
+
+          remainingQty -= deduction;
+        }
+      }
+
+      console.log("Stock updated successfully!");
+    } catch (err) {
+      console.error("Failed to update stock:", err);
+    }
+  };
+
+  /* =========================
+     HANDLE PRINT & CREATE SALE
+     ========================= */
   const handlePrintAndCreateSale = async () => {
     try {
       setLoading(true);
 
       const saleData = {
-        products: cart.map((item) => ({
+        products: items.map((item) => ({
           productId: item._id || item.id,
           name: item.name,
           quantity: item.qty,
           cost: item.cost,
           price: item.price,
         })),
-        totalAmount: total,
+        subtotal,
         discount,
+        totalAmount: total,
         customerName: "Walk-in",
         paymentStatus: "Paid",
       };
@@ -57,32 +130,21 @@ export default function PrintBillPage() {
       });
 
       if (res?.success) {
+        await updateStockAfterSale();
         localStorage.removeItem("printCart");
-        setModal({
-          show: true,
-          success: true,
-          message: "Sale created successfully!",
-        });
 
-        // Delay print to let modal show briefly
+        setModal({ show: true, success: true, message: "Sale created successfully!" });
+
         setTimeout(() => {
           window.print();
           router.push("/pos");
         }, 1000);
       } else {
-        setModal({
-          show: true,
-          success: false,
-          message: res?.message || "Failed to create sale",
-        });
+        setModal({ show: true, success: false, message: res?.message || "Failed to create sale" });
       }
     } catch (err) {
-      console.error("Failed to create sale:", err);
-      setModal({
-        show: true,
-        success: false,
-        message: "Failed to create sale",
-      });
+      console.error(err);
+      setModal({ show: true, success: false, message: "Failed to create sale" });
     } finally {
       setLoading(false);
     }
@@ -90,106 +152,75 @@ export default function PrintBillPage() {
 
   return (
     <div className="p-6">
-      {/* Back Button */}
-      <div className="mb-4">
-        <button
-          onClick={handleBack}
-          className="bg-teal-600 text-white font-semibold px-4 py-2 rounded shadow hover:bg-teal-700 flex items-center gap-2"
-        >
-          <FaArrowLeft />
-          Back to Cart
-        </button>
-      </div>
+      <button
+        onClick={handleBack}
+        className="mb-4 bg-teal-600 text-white px-4 py-2 rounded flex items-center gap-2"
+      >
+        <FaArrowLeft /> Back to Cart
+      </button>
 
-      {/* Invoice Container */}
-      <div className="invoice-container bg-white rounded-xl shadow-lg w-full mx-auto p-6">
-        <div className="text-center mb-4">
-          <h2 className="text-2xl font-bold text-black">Invoice</h2>
-          <p className="text-sm text-gray-500">{new Date().toLocaleString()}</p>
+      <div className="invoice-container bg-white shadow p-4 mx-auto">
+        <div className="text-center mb-2">
+          <h2 className="text-lg font-bold">Store Name</h2>
+          <p className="text-xs">{new Date().toLocaleString()}</p>
+          <hr className="my-2 border-t border-gray-400" />
         </div>
 
-        <table className="w-full text-left border-collapse border">
+        <table className="w-full text-xs border-collapse">
           <thead>
-            <tr className="bg-teal-500 text-black">
-              <th className="p-2 border">#</th>
-              <th className="p-2 border">Product</th>
-              <th className="p-2 border">Qty</th>
-              <th className="p-2 border">Price</th>
-              <th className="p-2 border">Total</th>
+            <tr>
+              <th className="text-left">#</th>
+              <th className="text-left">Item</th>
+              <th className="text-right">Qty</th>
+              <th className="text-right">Price</th>
+              <th className="text-right">Total</th>
             </tr>
           </thead>
           <tbody>
-            {cart.map((item, idx) => (
-              <tr key={item._id || item.id || idx} className="even:bg-gray-50">
-                <td className="p-2 border">{idx + 1}</td>
-                <td className="p-2 border">{item.name}</td>
-                <td className="p-2 border">{item.qty}</td>
-                <td className="p-2 border">Rs.{item.price.toFixed(2)}</td>
-                <td className="p-2 border font-bold text-black">
-                  Rs.{(item.price * item.qty).toFixed(2)}
-                </td>
+            {items.map((item, idx) => (
+              <tr key={item._id || item.id || idx}>
+                <td>{idx + 1}</td>
+                <td>{item.name}</td>
+                <td className="text-right">{item.qty}</td>
+                <td className="text-right">Rs.{item.price.toFixed(2)}</td>
+                <td className="text-right font-bold">Rs.{(item.price * item.qty).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        <div className="mt-4 space-y-2">
+        <hr className="my-2 border-t border-gray-400" />
+
+        <div className="text-xs space-y-1">
           <div className="flex justify-between">
             <span>Subtotal</span>
             <span>Rs.{subtotal.toFixed(2)}</span>
           </div>
 
-          <div className="flex justify-between items-center gap-2">
-            <span>Discount</span>
-            <input
-              type="number"
-              min="0"
-              value={discount}
-              onChange={(e) => setDiscount(Number(e.target.value))}
-              className="border px-2 py-1 rounded w-24 text-right discount-input"
-            />
-          </div>
+          {discount > 0 && (
+            <div className="flex justify-between text-red-600 font-medium">
+              <span>Discount</span>
+              <span>Rs.{discount.toFixed(2)}</span>
+            </div>
+          )}
 
-          <div className="flex justify-between font-bold text-black text-lg border-t pt-2 mt-2">
+          <div className="flex justify-between font-bold border-t pt-1">
             <span>Total</span>
             <span>Rs.{total.toFixed(2)}</span>
           </div>
         </div>
 
-        <div className="text-center mt-4">
-          <button
-            onClick={handlePrintAndCreateSale}
-            disabled={loading}
-            className="bg-teal-600 text-white px-6 py-2 rounded shadow hover:opacity-90 font-semibold"
-          >
-            {loading ? "Processing..." : "Print"}
-          </button>
-        </div>
-
-        <div className="text-center mt-2 text-sm text-gray-500">
-          Thank you for your purchase!
-        </div>
+        <div className="text-center mt-2 text-xs">Thank you for shopping!</div>
       </div>
 
-      {/* Success / Error Modal */}
-      {modal.show && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-xl p-6 w-80 text-center">
-            <h3 className={`text-lg font-bold mb-2 ${modal.success ? "text-emerald-600" : "text-red-600"}`}>
-              {modal.success ? "Success" : "Error"}
-            </h3>
-            <p className="mb-4">{modal.message}</p>
-            <button
-              onClick={() => setModal({ ...modal, show: false })}
-              className="bg-teal-600 text-white px-4 py-2 rounded shadow hover:bg-teal-700"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      <button
+        onClick={handlePrintAndCreateSale}
+        disabled={loading}
+        className="mt-4 w-full bg-teal-600 text-white py-2 rounded"
+      >
+        {loading ? "Processing..." : "Print"}
+      </button>
 
-      {/* Print CSS */}
       <style jsx global>{`
         @media print {
           body * {
@@ -201,17 +232,20 @@ export default function PrintBillPage() {
           }
           .invoice-container {
             position: absolute;
-            left: 0;
             top: 0;
-            width: 100%;
+            left: 0;
+            width: 80mm;
+            font-family: monospace;
+            padding: 4mm;
           }
-
-          .discount-input {
-            border: none !important;
-            box-shadow: none !important;
-            background: transparent !important;
-            padding: 0 !important;
-            text-align: right;
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+          }
+          td,
+          th {
+            padding: 2px 0;
           }
         }
       `}</style>

@@ -1,0 +1,302 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { apiRequest } from "@/app/authservice/api";
+import { Trash2 } from "lucide-react";
+
+const TestUpdateModal = ({ onClose, testId }) => {
+  const [patients, setPatients] = useState([]);
+  const [tests, setTests] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [form, setForm] = useState({
+    patient: "",
+    age: "",
+    gender: "",
+    doctor: "",
+    name: "",
+    date: "",
+    mobile: "",
+    status: "Pending",
+    paymentStatus: "Pending",
+    parameters: [],
+    fee: 0,
+    discount: 0,
+    totalfee: 0,
+  });
+
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState({ show: false, message: "" });
+
+  /* ================= FETCH PATIENTS AND TEST PARAMETERS ================= */
+  useEffect(() => {
+    apiRequest("/patients").then((res) => res?.success && setPatients(res.data));
+    apiRequest("/testParameters").then((res) => res?.success && setTests(res.data));
+  }, []);
+
+  /* ================= FETCH TEST RECORD BY ID ================= */
+  useEffect(() => {
+    if (!testId) return;
+
+    setLoading(true);
+    apiRequest(`/tests/${testId}`)
+      .then((res) => {
+        if (res?.success && res.data) {
+          const data = res.data;
+          setForm({
+            patient: data.patient || "",
+            age: data.age || "",
+            gender: data.gender || "",
+            doctor: data.doctor || "",
+            name: data.name || "",
+            date: data.date ? data.date.slice(0, 10) : "", // for input type=date
+            mobile: data.mobile || "",
+            status: data.status || "Pending",
+            paymentStatus: data.paymentStatus || "Pending",
+            parameters: data.parameters || [],
+            fee: data.fee || 0,
+            discount: data.discount || 0,
+            totalfee: data.totalfee || 0,
+          });
+        } else {
+          setErrorModal({ show: true, message: "Failed to fetch test data." });
+        }
+      })
+      .catch((err) => setErrorModal({ show: true, message: err.message || "Error fetching test." }))
+      .finally(() => setLoading(false));
+  }, [testId]);
+
+  /* ================= HANDLE TEST SELECTION ================= */
+  const handleTestChange = (name) => {
+    const selectedTest = tests.find((t) => t.name === name);
+    if (!selectedTest) return;
+
+    const alreadyAdded = form.parameters.some((p) => p.testName === name);
+    if (alreadyAdded) return;
+
+    const newParams =
+      selectedTest.parameters?.map((p) => ({
+        testName: name,
+        name: p.name || "",
+        min: p.min || "",
+        max: p.max || "",
+        unit: p.unit || "",
+        cost: p.cost || 0,
+        duration: p.duration || "",
+        result: "",
+      })) || [];
+
+    const updatedParams = [...form.parameters, ...newParams];
+    const totalFee = updatedParams.reduce((sum, p) => sum + Number(p.cost || 0), 0);
+
+    setForm((prev) => ({
+      ...prev,
+      parameters: updatedParams,
+      name,
+      fee: totalFee,
+      totalfee: Math.max(totalFee - (prev.discount || 0), 0),
+    }));
+  };
+
+  /* ================= HANDLE FORM CHANGES ================= */
+  const handleChange = (key, value) => {
+    if (key === "mobile") value = value.replace(/\D/g, "").slice(0, 11);
+    setForm((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleParamChange = (index, key, value) => {
+    const updated = [...form.parameters];
+    updated[index][key] = value;
+    const totalFee = updated.reduce((sum, p) => sum + Number(p.cost || 0), 0);
+    setForm((prev) => ({
+      ...prev,
+      parameters: updated,
+      fee: totalFee,
+      totalfee: Math.max(totalFee - prev.discount, 0),
+    }));
+  };
+
+  const handleDiscountChange = (value) => {
+    const discount = Number(value) || 0;
+    setForm((prev) => ({
+      ...prev,
+      discount,
+      totalfee: Math.max(prev.fee - discount, 0),
+    }));
+  };
+
+  const removeParameter = (index) => {
+    const updated = form.parameters.filter((_, i) => i !== index);
+    const totalFee = updated.reduce((sum, p) => sum + Number(p.cost || 0), 0);
+    setForm((prev) => ({
+      ...prev,
+      parameters: updated,
+      fee: totalFee,
+      totalfee: Math.max(totalFee - prev.discount, 0),
+    }));
+  };
+
+  /* ================= HANDLE SUBMIT (UPDATE) ================= */
+  const handleSubmit = async () => {
+    if (!testId) return;
+
+    if (form.mobile.length !== 11) {
+      setErrorModal({ show: true, message: "Mobile number must be 11 digits." });
+      return;
+    }
+
+    try {
+      const res = await apiRequest(`/tests/updateTest/${testId}`, {
+        method: "PUT",
+        data: {
+          ...form,
+          fee: Number(form.fee),
+          discount: Number(form.discount),
+          totalfee: Number(form.totalfee),
+        },
+      });
+      res?.success ? setSuccessModal(true) : setErrorModal({ show: true, message: res.message || "Failed to update test." });
+    } catch (err) {
+      setErrorModal({ show: true, message: err.message || "Failed to update test." });
+    }
+  };
+
+  /* ================= GROUP PARAMETERS BY TEST ================= */
+  const groupedTests = form.parameters.reduce((acc, param) => {
+    if (!acc[param.testName]) acc[param.testName] = [];
+    acc[param.testName].push(param);
+    return acc;
+  }, {});
+
+  if (loading) return <div className="text-center p-6">Loading...</div>;
+
+  return (
+    <>
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4">
+        <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          {/* HEADER */}
+          <div className="bg-teal-600 text-white p-6 flex justify-between">
+            <h2 className="text-xl font-bold">Update Lab Test Report</h2>
+            <button onClick={onClose}>✕</button>
+          </div>
+
+          <form className="p-6 space-y-6" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+            {/* PATIENT INFO */}
+            <section className="grid md:grid-cols-3 gap-4">
+              {["patient","age","gender","doctor","date","mobile"].map((key) => (
+                <div key={key}>
+                  <label className="label">{key.charAt(0).toUpperCase() + key.slice(1)}</label>
+                  {key === "gender" ? (
+                    <select className="input" value={form.gender} onChange={(e)=>handleChange("gender",e.target.value)}>
+                      <option value="">Select</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Other</option>
+                    </select>
+                  ) : key === "patient" ? (
+                    <select className="input" value={form.patient} onChange={(e)=>handleChange("patient",e.target.value)}>
+                      <option value="">Select Patient</option>
+                      {patients.map((p)=><option key={p._id} value={p.name}>{p.name}</option>)}
+                    </select>
+                  ) : (
+                    <input type={key==="date"?"date":"text"} className="input" value={form[key]} onChange={(e)=>handleChange(key,e.target.value)} />
+                  )}
+                </div>
+              ))}
+            </section>
+
+            {/* TEST NAME SELECT */}
+            <section className="mt-4 md:w-1/3">
+              <label className="label">Test Name</label>
+              <select className="input" value={form.name} onChange={(e) => handleTestChange(e.target.value)}>
+                <option value="">Select Test</option>
+                {tests.map((t) => <option key={t._id} value={t.name}>{t.name}</option>)}
+              </select>
+            </section>
+
+            {/* PARAMETERS */}
+            <section className="mt-4">
+              {Object.entries(groupedTests).map(([testName, params]) => (
+                <div key={testName} className="border rounded-lg p-4 mb-4">
+                  <h3 className="font-bold text-teal-600 mb-2">{testName}</h3>
+                  <table className="w-full border text-sm text-center">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        {["Parameter","Min","Max","Unit","Cost","Duration","Result","Action"].map((h)=>(<th key={h} className="border p-2">{h}</th>))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {params.map((p,i)=>{
+                        const idx = form.parameters.findIndex(fp=>fp===p);
+                        return (
+                          <tr key={i}>
+                            <td className="border p-1"><input className="table-input" value={p.name} onChange={(e)=>handleParamChange(idx,"name",e.target.value)} /></td>
+                            <td className="border p-1"><input className="table-input" value={p.min} onChange={(e)=>handleParamChange(idx,"min",e.target.value)} /></td>
+                            <td className="border p-1"><input className="table-input" value={p.max} onChange={(e)=>handleParamChange(idx,"max",e.target.value)} /></td>
+                            <td className="border p-1"><input className="table-input" value={p.unit} onChange={(e)=>handleParamChange(idx,"unit",e.target.value)} /></td>
+                            <td className="border p-1"><input type="number" className="table-input" value={p.cost} onChange={(e)=>handleParamChange(idx,"cost",e.target.value)} /></td>
+                            <td className="border p-1"><input className="table-input" value={p.duration} onChange={(e)=>handleParamChange(idx,"duration",e.target.value)} /></td>
+                            <td className="border p-1"><input className="table-input" value={p.result} onChange={(e)=>handleParamChange(idx,"result",e.target.value)} /></td>
+                            <td className="border p-1 text-center"><Trash2 size={18} className="text-red-500 cursor-pointer mx-auto" onClick={()=>removeParameter(idx)} /></td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+            </section>
+
+            {/* COST & STATUS */}
+            <section className="grid md:grid-cols-3 gap-4 mt-2">
+              <div><label className="label">Fee</label><input className="input" type="number" value={form.fee} disabled /></div>
+              <div><label className="label">Discount</label><input className="input" type="number" value={form.discount} onChange={(e)=>handleDiscountChange(e.target.value)} /></div>
+              <div><label className="label">Total Cost</label><input className="input bg-gray-100" value={form.totalfee} disabled /></div>
+            </section>
+
+            <section className="grid md:grid-cols-2 gap-4 mt-2">
+              <div><label className="label">Test Status</label><input className="input" value={form.status} onChange={(e)=>handleChange("status",e.target.value)} /></div>
+              <div><label className="label">Payment Status</label><input className="input" value={form.paymentStatus} onChange={(e)=>handleChange("paymentStatus",e.target.value)} /></div>
+            </section>
+
+            {/* FOOTER */}
+            <div className="flex justify-end gap-3 pt-4 border-t">
+              <button type="button" onClick={onClose} className="border px-4 py-2 rounded">Cancel</button>
+              <button type="submit" className="bg-teal-600 text-white px-5 py-2 rounded">Update Report</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {/* SUCCESS MODAL */}
+      {successModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000]">
+          <div className="bg-white rounded-xl p-6 w-[350px] text-center">
+            <h3 className="text-green-600 text-xl font-bold mb-2">Success</h3>
+            <p className="mb-4">Test updated successfully.</p>
+            <button onClick={() => setSuccessModal(false)} className="px-4 py-2 bg-teal-600 text-white rounded">OK</button>
+          </div>
+        </div>
+      )}
+
+      {/* ERROR MODAL */}
+      {errorModal.show && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[10000]">
+          <div className="bg-white rounded-xl p-6 w-[350px] text-center">
+            <h3 className="text-red-600 text-xl font-bold mb-2">Error</h3>
+            <p className="mb-4">{errorModal.message}</p>
+            <button onClick={() => setErrorModal({ show: false, message: "" })} className="px-4 py-2 bg-red-600 text-white rounded">Close</button>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        .input { height: 40px; border: 2px solid #14b8a6; border-radius: 6px; padding: 0 10px; font-size: 14px; width: 100%; }
+        .label { font-size: 14px; font-weight: bold; margin-bottom: 4px; display: block; }
+        .table-input { width: 100%; padding: 4px; border: 1px solid #ccc; border-radius: 4px; }
+      `}</style>
+    </>
+  );
+};
+
+export default TestUpdateModal;

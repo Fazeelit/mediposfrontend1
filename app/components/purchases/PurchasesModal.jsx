@@ -6,6 +6,7 @@ import { apiRequest } from "@/app/authservice/api";
 
 const PurchaseModal = ({ onClose }) => {
   const [supplier, setSupplier] = useState("");
+  const [suppliersList, setSuppliersList] = useState([]); // <-- suppliers list
   const [purchaseDate, setPurchaseDate] = useState(() =>
     new Date().toISOString().slice(0, 10)
   );
@@ -21,20 +22,43 @@ const PurchaseModal = ({ onClose }) => {
   const [successModal, setSuccessModal] = useState(false);
   const [errorModal, setErrorModal] = useState({ show: false, message: "" });
 
-  // Fetch product list
+  // Fetch product list with distinct names
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await apiRequest("/products/ProductName", { method: "GET" });
         const products = res?.data || res;
         if (!Array.isArray(products)) throw new Error("Invalid product response");
-        setProductsList(products.map((p) => ({ id: p._id, name: p.name })));
+
+        // Map to {id, name} and remove duplicates by name
+        const distinctProducts = Array.from(
+          new Map(products.map((p) => [p.name, { id: p._id, name: p.name }])).values()
+        );
+
+        setProductsList(distinctProducts);
       } catch (err) {
         console.error(err);
         setErrorModal({ show: true, message: "Failed to fetch product list" });
       }
     };
     fetchProducts();
+  }, []);
+
+
+  // Fetch suppliers list
+  useEffect(() => {
+    const fetchSuppliers = async () => {
+      try {
+        const res = await apiRequest("/suppliers", { method: "GET" });
+        const data = res?.data || res;
+        if (!Array.isArray(data)) throw new Error("Invalid supplier response");
+        setSuppliersList(data.map((s) => s.name)); // only names
+      } catch (err) {
+        console.error(err);
+        setErrorModal({ show: true, message: "Failed to fetch suppliers" });
+      }
+    };
+    fetchSuppliers();
   }, []);
 
   // Add new item row
@@ -52,7 +76,8 @@ const PurchaseModal = ({ onClose }) => {
     ]);
   };
 
-  const handleRemoveItem = (id) => setItems((prev) => prev.filter((it) => it.id !== id));
+  const handleRemoveItem = (id) =>
+    setItems((prev) => prev.filter((it) => it.id !== id));
 
   const handleItemChange = (id, field, value) => {
     setItems((prev) =>
@@ -60,16 +85,21 @@ const PurchaseModal = ({ onClose }) => {
         it.id !== id
           ? it
           : {
-              ...it,
-              [field]: ["quantity", "price"].includes(field) ? Number(value || 0) : value,
-            }
+            ...it,
+            [field]: ["quantity", "price"].includes(field)
+              ? Number(value || 0)
+              : value,
+          }
       )
     );
     setErrors((prev) => ({ ...prev, [`${id}-${field}`]: "" }));
   };
 
   const rowTotal = (it) => Number(it.quantity || 0) * Number(it.price || 0);
-  const subtotal = useMemo(() => items.reduce((acc, it) => acc + rowTotal(it), 0), [items]);
+  const subtotal = useMemo(
+    () => items.reduce((acc, it) => acc + rowTotal(it), 0),
+    [items]
+  );
   const totalAmount = subtotal + Number(taxAmount || 0);
 
   const balance = useMemo(() => {
@@ -115,8 +145,8 @@ const PurchaseModal = ({ onClose }) => {
           paymentStatus === "Paid"
             ? totalAmount
             : paymentStatus === "Partial"
-            ? partialAmount
-            : 0,
+              ? partialAmount
+              : 0,
         paymentStatus,
         purchaseStatus,
         balance,
@@ -142,7 +172,10 @@ const PurchaseModal = ({ onClose }) => {
           onClose();
         }, 2000);
       } else {
-        setErrorModal({ show: true, message: response?.message || "Failed to create purchase" });
+        setErrorModal({
+          show: true,
+          message: response?.message || "Failed to create purchase",
+        });
       }
     } catch (err) {
       console.error(err);
@@ -195,7 +228,10 @@ const PurchaseModal = ({ onClose }) => {
           {/* Header */}
           <div className="sticky top-0 bg-gradient-to-r from-teal-500 to-teal-600 text-white p-6 flex justify-between items-center">
             <h2 className="text-2xl font-bold">New Purchase</h2>
-            <button onClick={onClose} className="p-2 hover:bg-white/20 rounded-lg transition-colors">
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+            >
               <X className="w-6 h-6" />
             </button>
           </div>
@@ -211,10 +247,15 @@ const PurchaseModal = ({ onClose }) => {
                   className="flex h-9 w-full rounded-md border border-gray-200 bg-white px-3 py-1 text-sm shadow-sm"
                 >
                   <option value="">Select supplier</option>
-                  <option value="Supplier A">Supplier A</option>
-                  <option value="Supplier B">Supplier B</option>
+                  {suppliersList.map((name, i) => (
+                    <option key={i} value={name}>
+                      {name}
+                    </option>
+                  ))}
                 </select>
-                {errors.supplier && <p className="text-xs text-red-600">{errors.supplier}</p>}
+                {errors.supplier && (
+                  <p className="text-xs text-red-600">{errors.supplier}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -225,7 +266,9 @@ const PurchaseModal = ({ onClose }) => {
                   onChange={(e) => setPurchaseDate(e.target.value)}
                   className="flex h-9 w-full rounded-md border border-gray-200 px-3 py-1 text-sm shadow-sm"
                 />
-                {errors.purchaseDate && <p className="text-xs text-red-600">{errors.purchaseDate}</p>}
+                {errors.purchaseDate && (
+                  <p className="text-xs text-red-600">{errors.purchaseDate}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -237,7 +280,9 @@ const PurchaseModal = ({ onClose }) => {
                   className="flex h-9 w-full rounded-md border border-gray-200 px-3 py-1 text-sm shadow-sm"
                   placeholder="Enter invoice #"
                 />
-                {errors.invoiceNumber && <p className="text-xs text-red-600">{errors.invoiceNumber}</p>}
+                {errors.invoiceNumber && (
+                  <p className="text-xs text-red-600">{errors.invoiceNumber}</p>
+                )}
               </div>
             </div>
 
@@ -262,7 +307,10 @@ const PurchaseModal = ({ onClose }) => {
                 <div className="w-9" />
               </div>
               {items.map((it) => (
-                <div key={it.id} className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg flex-wrap">
+                <div
+                  key={it.id}
+                  className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg flex-wrap"
+                >
                   <select
                     value={it.productId}
                     onChange={(e) => {
@@ -274,13 +322,15 @@ const PurchaseModal = ({ onClose }) => {
                   >
                     <option value="">Select product</option>
                     {productsList.map((p) => (
-                      <option key={p.id} value={p.id}>{p.name}</option>
+                      <option key={p.id} value={p.id}>
+                        {p.name}
+                      </option>
                     ))}
                   </select>
 
                   <input
                     type="number"
-                    min="0"
+                    placeholder="0"
                     value={it.quantity}
                     onChange={(e) => handleItemChange(it.id, "quantity", e.target.value)}
                     className="w-20 h-9 rounded-md border border-gray-200 px-2 text-sm shadow-sm text-center"
@@ -289,7 +339,7 @@ const PurchaseModal = ({ onClose }) => {
                   <input
                     type="number"
                     step="0.01"
-                    min="0"
+                    placeholder="0"
                     value={it.price}
                     onChange={(e) => handleItemChange(it.id, "price", e.target.value)}
                     className="w-24 h-9 rounded-md border border-gray-200 px-2 text-sm shadow-sm text-center"
@@ -302,7 +352,9 @@ const PurchaseModal = ({ onClose }) => {
                     className="w-24 h-9 rounded-md border border-gray-200 px-2 text-sm shadow-sm text-center"
                   />
 
-                  <p className="w-20 text-sm font-medium text-center">Rs. {rowTotal(it).toFixed(2)}</p>
+                  <p className="w-20 text-sm font-medium text-center">
+                    Rs. {rowTotal(it).toFixed(2)}
+                  </p>
 
                   <button
                     type="button"
@@ -385,7 +437,9 @@ const PurchaseModal = ({ onClose }) => {
                   onChange={(e) => setPartialAmount(Number(e.target.value))}
                   className="h-9 w-full rounded-md border border-gray-200 px-3 text-sm shadow-sm"
                 />
-                {errors.partialAmount && <p className="text-xs text-red-600">{errors.partialAmount}</p>}
+                {errors.partialAmount && (
+                  <p className="text-xs text-red-600">{errors.partialAmount}</p>
+                )}
               </div>
             )}
 

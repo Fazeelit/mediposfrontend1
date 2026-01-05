@@ -18,6 +18,7 @@ import {
   ShieldCheck,
   History,
   Settings,
+  Layers,
   X,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
     { name: "Doctors", icon: Stethoscope, path: "/doctors" },
     { name: "Products", icon: Package, path: "/products" },
     { name: "Purchases", icon: PackagePlus, path: "/purchases" },
+    { name: "Supplier", icon: Layers, path: "/suppliers" },
     { name: "Sales", icon: Receipt, path: "/sales" },
     { name: "Tests", icon: FlaskConical, path: "/tests" },
     { name: "Expenses", icon: Wallet, path: "/expenses" },

@@ -30,15 +30,15 @@ const ExpenseRow = ({ expense, onEdit }) => {
       <td className="p-2 max-w-xs truncate">{expense.description}</td>
       <td className="p-2">{expense.vendor}</td>
       <td className="p-2 text-sm text-slate-600">{expense.paymentMethod}</td>
-      <td className="p-2 font-bold text-red-600">${expense.amount.toFixed(2)}</td>
+      <td className="p-2 font-bold text-red-600">Rs.{expense.amount.toFixed(2)}</td>
      
       <td className="p-2">
         <div
           className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold border ${
-            statusColors[expense.status] || "bg-gray-100 text-gray-800 border-gray-200"
+            statusColors[expense.paymentStatus] || "bg-gray-100 text-gray-800 border-gray-200"
           }`}
         >
-          {expense.status}
+          {expense.paymentStatus}
         </div>
       </td>
     </tr>

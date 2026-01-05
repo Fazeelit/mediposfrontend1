@@ -8,75 +8,100 @@ const PartialPaymentModal = ({ onClose, onUpdate }) => {
   const [purchases, setPurchases] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [selectedSupplier, setSelectedSupplier] = useState("");
+
+  const [outstandingAmount, setOutstandingAmount] = useState(0);
   const [paidAmount, setPaidAmount] = useState("");
+  const [balance, setBalance] = useState(0);
   const [paymentStatus, setPaymentStatus] = useState("Pending");
-  const [totalAmount, setTotalAmount] = useState(0);
+
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Fetch all purchases and suppliers
+  /* ================= Fetch Purchases ================= */
   useEffect(() => {
-    const fetchAllPurchases = async () => {
+    const fetchPurchases = async () => {
       try {
         const res = await apiRequest("/purchases", { method: "GET" });
-        const allPurchases = res?.data || [];
-        setPurchases(allPurchases);
-        setSuppliers([...new Set(allPurchases.map((p) => p.supplier))]);
+        const all = res?.data || [];
+
+        setPurchases(all);
+
+        // Get unique suppliers
+        const uniqueSuppliers = Array.from(new Set(all.map((p) => p.supplier)));
+        setSuppliers(uniqueSuppliers);
       } catch (err) {
-        console.error(err);
+        console.error("Fetch Purchases Error:", err);
         setErrorMessage("Failed to fetch purchases");
         setShowError(true);
       }
     };
-    fetchAllPurchases();
+
+    fetchPurchases();
   }, []);
 
-  // Handle supplier selection
+  /* ================= Supplier Change ================= */
   const handleSupplierChange = (supplier) => {
     setSelectedSupplier(supplier);
-    setPaidAmount(""); // clear paid amount
+    setPaidAmount("");
     setPaymentStatus("Pending");
 
-    // Sum of balances for the selected supplier
-    const supplierPurchases = purchases.filter((p) => p.supplier === supplier);
-    const total = supplierPurchases.reduce(
-      (sum, p) => sum + ((p.totalAmount || 0) - (p.paidAmount || 0)),
+    // Filter unpaid or partial purchases
+    const supplierPurchases = purchases.filter(
+      (p) => p.supplier === supplier && p.paymentStatus !== "Paid"
+    );
+
+    const outstanding = supplierPurchases.reduce(
+      (sum, p) => sum + (Number(p.balance) || 0),
       0
     );
-    setTotalAmount(total);
+
+    setOutstandingAmount(outstanding);
+    setBalance(outstanding);
   };
 
-  // Automatically update payment status based on paidAmount
+  /* ================= Auto Balance & Status (UI only) ================= */
   useEffect(() => {
-    const numericPaid = Number(paidAmount) || 0;
+    const pay = Number(paidAmount) || 0;
+    const remaining = Math.max(outstandingAmount - pay, 0);
+    setBalance(remaining);
 
-    if (numericPaid === 0) setPaymentStatus("Pending");
-    else if (numericPaid < totalAmount) setPaymentStatus("Partial");
+    if (pay === 0) setPaymentStatus("Pending");
+    else if (pay < outstandingAmount) setPaymentStatus("Partial");
     else setPaymentStatus("Paid");
-  }, [paidAmount, totalAmount]);
+  }, [paidAmount, outstandingAmount]);
 
+  /* ================= Submit ================= */
   const handleSubmit = async () => {
-    if (!selectedSupplier) return;
+    const payment = Number(paidAmount);
+
+    if (!selectedSupplier || payment <= 0) {
+      setErrorMessage("Please select a supplier and enter a valid amount");
+      setShowError(true);
+      return;
+    }
+
+    if (payment > outstandingAmount) {
+      setErrorMessage("Paid amount cannot exceed outstanding balance");
+      setShowError(true);
+      return;
+    }
 
     try {
-      await apiRequest(`/purchases/createPurchase/${selectedSupplier}`, {
-        method: "POST",
-        data: {
-          supplier: selectedSupplier,
-          paidAmount: Number(paidAmount) || 0,
-          paymentStatus,
-        },
+      // Send numeric value only
+      await apiRequest(`/purchases/supplierPayment/${encodeURIComponent(selectedSupplier)}`, {
+        method: "PUT",
+        data: { paidAmount: payment },
       });
 
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
-        onUpdate();
+        onUpdate?.();
         onClose();
-      }, 1500);
+      }, 1200);
     } catch (err) {
-      console.error(err);
+      console.error("Partial Payment Error:", err);
       setErrorMessage(err?.response?.data?.message || "Failed to update payment");
       setShowError(true);
     }
@@ -84,18 +109,18 @@ const PartialPaymentModal = ({ onClose, onUpdate }) => {
 
   return (
     <>
-      {/* Success */}
+      {/* ================= Success ================= */}
       {showSuccess && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl text-center">
             <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-2" />
             <h2 className="font-bold text-green-700 text-lg">Success</h2>
-            <p>Partial payment updated successfully</p>
+            <p>Supplier payment applied successfully</p>
           </div>
         </div>
       )}
 
-      {/* Error */}
+      {/* ================= Error ================= */}
       {showError && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl text-center">
@@ -104,7 +129,7 @@ const PartialPaymentModal = ({ onClose, onUpdate }) => {
             <p>{errorMessage}</p>
             <button
               onClick={() => setShowError(false)}
-              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-md"
             >
               Close
             </button>
@@ -112,85 +137,83 @@ const PartialPaymentModal = ({ onClose, onUpdate }) => {
         </div>
       )}
 
-      {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+      {/* ================= Modal ================= */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm">
         <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">Partial Payment</h2>
+            <h2 className="text-xl font-bold">Supplier Partial Payment</h2>
             <button onClick={onClose} className="p-2 hover:bg-gray-200 rounded-full">
               <X className="w-5 h-5" />
             </button>
           </div>
 
           <div className="space-y-4">
-            {/* Supplier Selection */}
             <div>
-              <label className="block text-sm font-medium">Select Supplier</label>
+              <label className="text-sm font-medium">Supplier</label>
               <select
                 value={selectedSupplier}
                 onChange={(e) => handleSupplierChange(e.target.value)}
                 className="w-full h-9 px-3 border rounded-md text-sm"
               >
                 <option value="">Select Supplier</option>
-                {suppliers.map((s, i) => (
-                  <option key={i} value={s}>
+                {suppliers.map((s) => (
+                  <option key={s} value={s}>
                     {s}
                   </option>
                 ))}
               </select>
             </div>
 
-            {/* Payment Details */}
             {selectedSupplier && (
               <>
                 <div>
-                  <label className="block text-sm font-medium">Total Amount</label>
+                  <label className="text-sm font-medium">Outstanding Amount</label>
                   <input
-                    type="number"
-                    value={totalAmount}
+                    value={outstandingAmount}
                     readOnly
                     className="w-full h-9 px-3 border rounded-md bg-gray-100 text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium">Paid Amount</label>
+                  <label className="text-sm font-medium">Pay Now</label>
                   <input
                     type="number"
                     value={paidAmount}
                     onChange={(e) => setPaidAmount(e.target.value)}
-                    placeholder="Enter amount"
                     className="w-full h-9 px-3 border rounded-md text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium">Payment Status</label>
-                  <select
+                  <label className="text-sm font-medium">Remaining Balance</label>
+                  <input
+                    value={balance}
+                    readOnly
+                    className="w-full h-9 px-3 border rounded-md bg-gray-100 text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium">Payment Status</label>
+                  <input
                     value={paymentStatus}
-                    onChange={(e) => setPaymentStatus(e.target.value)}
-                    className="w-full h-9 px-3 border rounded-md text-sm"
-                  >
-                    <option value="Pending">Pending</option>
-                    <option value="Partial">Partial</option>
-                    <option value="Paid">Paid</option>
-                  </select>
+                    readOnly
+                    className="w-full h-9 px-3 border rounded-md bg-gray-100 text-sm"
+                  />
                 </div>
               </>
             )}
           </div>
 
           <div className="flex justify-end gap-3 mt-6">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100"
-            >
+            <button onClick={onClose} className="px-4 py-2 border rounded-md">
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               disabled={!selectedSupplier}
-              className="px-4 py-2 rounded-md bg-teal-600 text-white hover:bg-teal-700 disabled:bg-gray-300"
+              className="px-4 py-2 bg-teal-600 text-white rounded-md disabled:opacity-50"
             >
               Update Payment
             </button>
