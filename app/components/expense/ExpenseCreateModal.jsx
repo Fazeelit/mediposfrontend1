@@ -14,6 +14,7 @@ const ExpenseCreateModal = ({ isOpen, onClose, onSave, editData }) => {
     paymentStatus: "Pending",
     amount: "",    
     referenceNumber: "",
+    investment:"",
     notes: "",
   });
 
@@ -34,6 +35,7 @@ const ExpenseCreateModal = ({ isOpen, onClose, onSave, editData }) => {
         paymentStatus: editData.paymentStatus || "Pending",
         amount: editData.amount ? String(editData.amount) : "",        
         referenceNumber: editData.referenceNumber || "",
+        investment: editData.investment || "0",
         notes: editData.notes || "",
       });
     } else {
@@ -46,6 +48,7 @@ const ExpenseCreateModal = ({ isOpen, onClose, onSave, editData }) => {
         paymentStatus: "Pending",
         amount: "",        
         referenceNumber: "",
+        investment:"0",
         notes: "",
       });
     }
@@ -82,6 +85,7 @@ const ExpenseCreateModal = ({ isOpen, onClose, onSave, editData }) => {
       paymentStatus: form.paymentStatus,
       amount: Number(form.amount),      
       referenceNumber: form.referenceNumber.trim(),
+      investment: form.investment.trim(),
       notes: form.notes.trim(),
     };
 
@@ -163,7 +167,8 @@ const ExpenseCreateModal = ({ isOpen, onClose, onSave, editData }) => {
                 ["paymentMethod", "Payment Method", "select"],
                 ["paymentStatus", "Payment Status", "select"],
                 ["vendor", "Vendor", "text"],
-                ["referenceNumber", "Reference Number", "text"],                
+                ["referenceNumber", "Reference Number", "text"],
+                ["investment", "Investment", "number"],   
                 ["description", "Description *", "textarea"],
                 ["notes", "Notes", "textarea"],
               ].map(([key, label, type]) => (
@@ -195,7 +200,7 @@ const ExpenseCreateModal = ({ isOpen, onClose, onSave, editData }) => {
                       value={form[key]}
                       onChange={(e) => handleChange(key, e.target.value)}
                       disabled={loading}
-                      placeholder={type === "number" ? "0.00" : ""}
+                      placeholder={type === "number" ? "0" : ""}
                       className="flex h-9 w-full rounded-md border border-gray-200 bg-transparent px-3 py-1 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-400"
                     />
                   )}

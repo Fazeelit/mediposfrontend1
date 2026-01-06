@@ -1,16 +1,44 @@
-import React from "react";
-import { Calendar } from "lucide-react";
+"use client";
 
-const appointments = [
-  { patient: "Maria Garcia", doctor: "Dr. Michael Chen", time: "15:05", date: "Dec 09" },
-  { patient: "John Williams", doctor: "Dr. Sarah Johnson", time: "07:14", date: "Dec 03" },
-  { patient: "Linda Martinez", doctor: "Dr. Michael Chen", time: "02:00 PM", date: "Jan 26" },
-  { patient: "John Williams", doctor: "Dr. Sarah Johnson", time: "10:00 AM", date: "Jan 25" },
-  { patient: "Maria Garcia", doctor: "Dr. Emily Rodriguez", time: "11:30 AM", date: "Jan 25" },
-  // Add more if needed
-];
+import React, { useState, useEffect } from "react";
+import { Calendar } from "lucide-react";
+import { apiRequest } from "@/app/authservice/api";
+import { toast } from "react-hot-toast";
 
 const UpcomingAppointments = () => {
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch upcoming appointments from API
+  const fetchAppointments = async () => {
+    try {
+      setLoading(true);
+      const res = await apiRequest("/appointments");
+      if (res?.success && Array.isArray(res.data)) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Filter only upcoming appointments
+        const upcoming = res.data
+          .filter((appt) => new Date(appt.date) >= today)
+          .sort((a, b) => new Date(a.date) - new Date(b.date)); // sort by date ascending
+
+        setAppointments(upcoming);
+      } else {
+        setAppointments([]);
+      }
+    } catch (err) {
+      console.error("Failed to fetch appointments:", err);
+      toast.error("Failed to fetch upcoming appointments");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
+
   return (
     <div className="rounded-xl text-card-foreground border-0 shadow-lg bg-white/80 backdrop-blur">
       <div className="flex flex-col space-y-1.5 p-6">
@@ -19,21 +47,38 @@ const UpcomingAppointments = () => {
           Upcoming Appointments
         </div>
       </div>
+
       <div className="p-6 pt-0">
-        <div className="space-y-3 max-h-64 overflow-y-auto">
-          {appointments.map((app, index) => (
-            <div key={index} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
-              <div>
-                <p className="font-medium text-slate-900">{app.patient}</p>
-                <p className="text-sm text-slate-600">{app.doctor}</p>
+        {loading ? (
+          <div className="text-center py-6 text-slate-500">Loading...</div>
+        ) : appointments.length === 0 ? (
+          <div className="text-center py-6 text-slate-500">
+            No upcoming appointments
+          </div>
+        ) : (
+          <div className="space-y-3 max-h-64 overflow-y-auto">
+            {appointments.map((appt, index) => (
+              <div
+                key={appt._id || index}
+                className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                <div>
+                  <p className="font-medium text-slate-900">{appt.patient}</p>
+                  <p className="text-sm text-slate-600">{appt.doctor}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium text-slate-900">{appt.time}</p>
+                  <p className="text-xs text-slate-500">
+                    {new Date(appt.date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
               </div>
-              <div className="text-right">
-                <p className="text-sm font-medium text-slate-900">{app.time}</p>
-                <p className="text-xs text-slate-500">{app.date}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

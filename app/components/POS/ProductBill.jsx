@@ -44,31 +44,26 @@ export default function PrintBillPage() {
      ========================= */
   const updateStockAfterSale = async () => {
     try {
-      // 1️⃣ Fetch all products
       const res = await apiRequest("/products", { method: "GET" });
       const allProducts = res?.data || [];
 
-      // 2️⃣ Group products by name
       const productMap = new Map();
       allProducts.forEach((p) => {
         const key = p.name.trim().toLowerCase();
         if (productMap.has(key)) {
           const existing = productMap.get(key);
           productMap.set(key, {
-            ...existing,
             totalStock: existing.totalStock + Number(p.stock || 0),
             ids: [...existing.ids, p._id],
           });
         } else {
           productMap.set(key, {
-            ...p,
             totalStock: Number(p.stock || 0),
             ids: [p._id],
           });
         }
       });
 
-      // 3️⃣ Deduct sold quantities from same-name products
       for (const soldItem of items) {
         const key = soldItem.name.trim().toLowerCase();
         if (!productMap.has(key)) continue;
@@ -86,9 +81,8 @@ export default function PrintBillPage() {
           const deduction = Math.min(currentStock, remainingQty);
           const newStock = currentStock - deduction;
 
-          // ✅ Correct API endpoint for App Router
-          await apiRequest(`/products/updateStock/${id}`, {
-            method: "PATCH",
+          await apiRequest(`/products/updateProduct/${id}`, {
+            method: "PUT",
             data: { stock: newStock },
           });
 
@@ -130,7 +124,7 @@ export default function PrintBillPage() {
       });
 
       if (res?.success) {
-        await updateStockAfterSale();
+        await updateStockAfterSale(); // Deduct stock
         localStorage.removeItem("printCart");
 
         setModal({ show: true, success: true, message: "Sale created successfully!" });
@@ -170,7 +164,8 @@ export default function PrintBillPage() {
           <thead>
             <tr>
               <th className="text-left">#</th>
-              <th className="text-left">Item</th>
+              <th className="text-left">Unit</th>
+              <th className="text-left">Item</th>              
               <th className="text-right">Qty</th>
               <th className="text-right">Price</th>
               <th className="text-right">Total</th>
@@ -180,7 +175,8 @@ export default function PrintBillPage() {
             {items.map((item, idx) => (
               <tr key={item._id || item.id || idx}>
                 <td>{idx + 1}</td>
-                <td>{item.name}</td>
+                <td>{item.unit}</td>
+                <td>{item.name || "-"}</td>
                 <td className="text-right">{item.qty}</td>
                 <td className="text-right">Rs.{item.price.toFixed(2)}</td>
                 <td className="text-right font-bold">Rs.{(item.price * item.qty).toFixed(2)}</td>

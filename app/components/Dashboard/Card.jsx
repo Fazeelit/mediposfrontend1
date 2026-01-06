@@ -59,6 +59,25 @@ const Cards = () => {
         const products = getArray(productRes);
         const purchases = getArray(purchaseRes);
 
+        // ---------- Merge products by name and calculate total stock ----------
+        const mergedProductsMap = new Map();
+        products.forEach((p) => {
+          const key = p.name.trim().toLowerCase();
+          const stock = Number(p.stock) || 0;
+
+          if (mergedProductsMap.has(key)) {
+            const existing = mergedProductsMap.get(key);
+            mergedProductsMap.set(key, {
+              ...existing,
+              stock: existing.stock + stock,
+            });
+          } else {
+            mergedProductsMap.set(key, { ...p, stock });
+          }
+        });
+
+        const mergedProducts = Array.from(mergedProductsMap.values());
+
         // ---------- TODAY ----------
         const todaysAppointments = appointments.filter(
           (a) => new Date(a.date).toDateString() === today.toDateString()
@@ -93,9 +112,15 @@ const Cards = () => {
           .filter((t) => new Date(t.createdAt) >= last30Days)
           .reduce((sum, t) => sum + Number(t.totalfee || 0), 0);
 
-        // ---------- EXPENSE CALCULATIONS ----------
+        // ---------- INVESTMENT CALCULATIONS ----------
         const totalExpenses = expenses.reduce(
           (sum, e) => sum + Number(e.amount || 0),
+          0
+        );
+
+        // ---------- EXPENSE CALCULATIONS ----------
+        const totalInvestment = expenses.reduce(
+          (sum, e) => sum + Number(e.investment || 0),
           0
         );
 
@@ -108,12 +133,10 @@ const Cards = () => {
           .reduce((sum, e) => sum + Number(e.amount || 0), 0);
 
         const monthlyProfit =
-          monthlySalesProfit + monthlyAppointments + monthlyTests - totalExpenses;
+          monthlySalesProfit + monthlyAppointments + monthlyTests - totalExpenses + totalInvestment;
 
         // ---------- OTHER METRICS ----------
-        const lowStockItems = products.filter(
-          (p) => Number(p.stock || 0) < 10
-        ).length;
+        const lowStockItems = mergedProducts.filter((p) => p.stock <= 10).length;
 
         const pendingTests = tests.filter(
           (t) => t.status !== "Completed"

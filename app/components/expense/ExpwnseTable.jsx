@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { apiRequest } from "@/app/authservice/api";
 import ExpenseRow from "./ExpenseRow";
 
@@ -10,12 +10,13 @@ const ExpensesTable = ({ onEdit }) => {
   const [error, setError] = useState("");
 
   // Fetch all expenses
-  const fetchExpenses = async () => {
+  const fetchExpenses = useCallback(async () => {
     try {
       setLoading(true);
       const response = await apiRequest("/expenses", { method: "GET" });
       if (response?.success) {
         setData(response.data || []);
+        setError("");
       } else {
         throw new Error(response?.message || "Failed to fetch expenses.");
       }
@@ -25,11 +26,16 @@ const ExpensesTable = ({ onEdit }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchExpenses();
-  }, []);
+  }, [fetchExpenses]);
+
+  // Function to refresh data after edit/delete/add
+  const refreshExpenses = async () => {
+    await fetchExpenses();
+  };
 
   if (loading) {
     return (
@@ -38,9 +44,7 @@ const ExpensesTable = ({ onEdit }) => {
   }
 
   if (error) {
-    return (
-      <div className="text-center p-6 text-red-600">{error}</div>
-    );
+    return <div className="text-center p-6 text-red-600">{error}</div>;
   }
 
   if (data.length === 0) {
@@ -60,12 +64,23 @@ const ExpensesTable = ({ onEdit }) => {
             <th className="h-10 px-2 text-left font-semibold">Vendor</th>
             <th className="h-10 px-2 text-left font-semibold">Payment</th>
             <th className="h-10 px-2 text-left font-semibold">Amount</th>
-            <th className="h-10 px-2 text-left font-semibold">Payment Status</th>            
+            <th className="h-10 px-2 text-left font-semibold">Payment Status</th>
           </tr>
         </thead>
         <tbody>
           {data.map((expense) => (
-            <ExpenseRow key={expense._id} expense={expense} onEdit={onEdit} />
+            <ExpenseRow
+              key={expense._id}
+              expense={expense}
+              onEdit={async () => {
+                if (onEdit) await onEdit(expense); // custom edit callback
+                await refreshExpenses(); // fetch fresh records after edit
+              }}
+              onDelete={async () => {
+                // Optional: if ExpenseRow has delete, refresh after delete
+                await refreshExpenses();
+              }}
+            />
           ))}
         </tbody>
       </table>

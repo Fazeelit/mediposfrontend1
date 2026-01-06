@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import ExpenseCard from "../../components/expense/ExpenseCard";
 import ExpensesTable from "../../components/expense/ExpwnseTable";
 import ExpenseCreateModal from "../expense/ExpenseCreateModal";
-import ExpenseUpdateModal from "../expense/ExpenseUpdateModal";
 
 import { Plus, TrendingDown, Receipt } from "lucide-react";
 
@@ -49,14 +48,12 @@ const ExpensesPage = () => {
   const handleSave = (expense) => {
     if (editData) {
       // Update existing expense
-      setExpenses(
-        expenses.map((e) =>
-          e.id === editData.id ? { ...expense, id: editData.id } : e
-        )
+      setExpenses((prev) =>
+        prev.map((e) => (e.id === editData.id ? { ...expense, id: editData.id } : e))
       );
     } else {
       // Add new expense
-      setExpenses([...expenses, { ...expense, id: Date.now() }]);
+      setExpenses((prev) => [...prev, { ...expense, id: Date.now() }]);
     }
     setEditData(null);
     setModalOpen(false);
@@ -74,9 +71,7 @@ const ExpensesPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Expenses</h1>
-          <p className="text-slate-600 mt-1">
-            Track and manage business expenses
-          </p>
+          <p className="text-slate-600 mt-1">Track and manage business expenses</p>
         </div>
         <button
           className="inline-flex items-center gap-2 rounded-md text-sm font-medium h-9 px-4 py-2 text-white bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 shadow-lg hover:border-none"
@@ -112,24 +107,16 @@ const ExpensesPage = () => {
       {/* Expenses Table */}
       <ExpensesTable data={expenses} onEdit={handleEdit} />
 
-      {/* Conditional Modal: Create or Update */}
-      {modalOpen && !editData && (
+      {/* Modal */}
+      {modalOpen && (
         <ExpenseCreateModal
           isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-          onSave={handleSave}
-        />
-      )}
-
-      {modalOpen && editData && (
-        <ExpenseUpdateModal
-          isOpen={modalOpen}
+          editData={editData}
           onClose={() => {
             setModalOpen(false);
             setEditData(null);
           }}
           onSave={handleSave}
-          editData={editData}
         />
       )}
     </main>

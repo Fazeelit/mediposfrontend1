@@ -2,7 +2,6 @@
 
 import React from "react";
 
-// Function to format date like "Nov 27, 2025"
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "short", day: "numeric" };
   const date = new Date(dateString);
@@ -31,7 +30,6 @@ const ExpenseRow = ({ expense, onEdit }) => {
       <td className="p-2">{expense.vendor}</td>
       <td className="p-2 text-sm text-slate-600">{expense.paymentMethod}</td>
       <td className="p-2 font-bold text-red-600">Rs.{expense.amount.toFixed(2)}</td>
-     
       <td className="p-2">
         <div
           className={`inline-flex items-center rounded-md px-2.5 py-0.5 text-xs font-semibold border ${
